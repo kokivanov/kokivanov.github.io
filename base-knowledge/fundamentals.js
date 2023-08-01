@@ -55,10 +55,10 @@ null === +"\n0\n"; // false
 0, if equals zero.
 In this task we assume that the input is always a number. */
 // const input = prompt("Enter number", 0)
-const input = 14
-if (input < 0) console.log(-1)
-else if (input === 0) console.log(0)
-else console.log(1)
+const input = 14;
+if (input < 0) console.log(-1);
+else if (input === 0) console.log(0);
+else console.log(1);
 
 /*Rewrite if..else using multiple ternary operators '?'.
 
@@ -76,23 +76,27 @@ if (login == 'Employee') {
   message = '';
 } */
 
-let message = '', login = '';
+let message = "",
+  login = "";
 
-message = 
-    login == 'Employee' ? 'Hello' :
-    login == 'Director' ? 'Greetings' :
-    login == '' ? 'No login' :
-    message;
+message =
+  login == "Employee"
+    ? "Hello"
+    : login == "Director"
+    ? "Greetings"
+    : login == ""
+    ? "No login"
+    : message;
 
 /*Write an if condition to check that age is NOT between 14 and 90 inclusively.
 
 Create two variants: the first one using NOT !, the second one – without it. */
 
-//first 
-if (!(age > 13 && age < 91)) console.log("It is")
+//first
+if (!(age > 13 && age < 91)) console.log("It is");
 
 //second
-if (age < 15 && age > 89) console.log("It is")
+if (age < 15 && age > 89) console.log("It is");
 
 /* An integer number greater than 1 is called a prime if it cannot be divided without a remainder by anything except 1 and itself.
 
@@ -106,12 +110,12 @@ For n = 10 the result will be 2,3,5,7.
 
 P.S. The code should work for any n, not be hard-tuned for any fixed value. */
 
-let max = 45
+let max = 45;
 outer: for (let i = 0; i <= max; i++) {
-    for (let j = 2; j < i; j++) {
-        if (i % j == 0) continue outer
-    }
-    console.log(i)
+  for (let j = 2; j < i; j++) {
+    if (i % j == 0) continue outer;
+  }
+  console.log(i);
 }
 
 /*Write a loop which prompts for a number greater than 100. If the visitor enters another number – ask them to input again.
@@ -119,32 +123,32 @@ outer: for (let i = 0; i <= max; i++) {
 The loop must ask for a number until either the visitor enters a number greater than 100 or cancels the input/enters an empty line.
 
 Here we can assume that the visitor only inputs numbers. There’s no need to implement a special handling for a non-numeric input in this task. */
-let input2 = 18
+let input2 = 18;
 do {
-    input2++
-} while(input2 < 100)
+  input2++;
+} while (input2 < 100);
 
 // Simple switch
-const source = "+---+++-+=-++"
-let val = 0 
+const source = "+---+++-+=-++";
+let val = 0;
 
 outer: for (let i = 0; i < source.length; i++) {
-    const c = source[i]
-    switch (c) {
-        case '+':
-            val++
-            break;
-        case '-':
-            val--
-            break;
-        case '=':
-            console.log(val)
-            break outer;
-        default:
-            console.log("Error in source")
-            break outer;
-    }
-};
+  const c = source[i];
+  switch (c) {
+    case "+":
+      val++;
+      break;
+    case "-":
+      val--;
+      break;
+    case "=":
+      console.log(val);
+      break outer;
+    default:
+      console.log("Error in source");
+      break outer;
+  }
+}
 
 /* Write a function pow(x,n) that returns x in power n. Or, in other words, multiplies x by itself n times and returns the result.
 
@@ -153,7 +157,7 @@ pow(3, 3) = 3 * 3 * 3 = 27
 pow(1, 100) = 1 * 1 * ...* 1 = 1
 Create a web-page that prompts for x and n, and then shows the result of pow(x,n). */
 function pow(base, power) {
-    return (base || 0) ** (power || 0)
+  return (base || 0) ** (power || 0);
 }
 
 /*Replace Function Expressions with arrow functions in the code below:
@@ -170,12 +174,12 @@ ask(
 );*/
 
 function ask(question, yes, no) {
-    if (confirm(question)) yes();
-    else no();
+  if (confirm(question)) yes();
+  else no();
 }
 
 ask(
-    "Do you agree?",
-    () => alert("You agreed."),
-    () => alert("You canceled the execution.")
+  "Do you agree?",
+  () => alert("You agreed."),
+  () => alert("You canceled the execution.")
 );
