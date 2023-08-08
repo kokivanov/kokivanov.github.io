@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list"></ul>
+
+    <script>
+        function prompter() {
+            const list = document.getElementById("list");
+            
+            for (;;) {
+                const input = prompt("Enter a list element", "Sample text");
+                console.log(input)
+                if (input === '' || input === null) break;
+                const elem = document.createElement("li");
+                elem.textContent = input;
+                list.append(elem);
+            }
+        }
+
+        prompter();
+    </script>
+</body>
+</html>

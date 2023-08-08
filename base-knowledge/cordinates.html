@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="cordinates.css" />
+    <script>
+      document.onclick = function (e) {
+        // shows click coordinates
+        coords.innerHTML = e.clientX + ":" + e.clientY;
+      };
+    </script>
+  </head>
+
+  <body>
+    Click anywhere to get window coordinates.
+    <br />
+    That's for testing, to check the result you get by JavaScript.
+    <br />
+    <div id="coords">(click coordinates show up here)</div>
+
+    <div id="field">
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      .
+    </div>
+
+    <div class="triangle-right" style="left: -20px; top: -176px">1</div>
+    <div class="triangle-right" style="left: -10px; top: -178px">3</div>
+    <div class="triangle-right" style="left: 190px; top: -40px">4</div>
+    <div class="triangle-right" style="left: 200px; top: -42px">2</div>
+
+    <script>
+      const field = document.getElementById("field");
+      const rectCords = field.getBoundingClientRect();
+
+      const outerLeftTopX = rectCords.left;
+      const outerLeftTopY = rectCords.top;
+
+      const innerLeftTopX = rectCords.left + field.clientLeft;
+      const innerLeftTopY = rectCords.top + field.clientTop;
+
+      const outerRightButtomX = rectCords.right;
+      const outerRightButtomY = rectCords.bottom;
+
+      const innerRightButtomX = innerLeftTopX + field.clientWidth;
+      const innerRightButtomY = innerLeftTopY + field.clientHeight;
+
+      const list = document.createElement("ul")
+      for (let i = 1; i < 5; i++) {
+          list.append(document.createElement('li'))
+          list.lastChild.innerHTML = `<b>${i}</b>`
+      }
+
+      list.children[0].innerHTML += ` ${outerLeftTopX}:${outerLeftTopY}`
+      list.children[1].innerHTML += ` ${outerRightButtomX}:${outerRightButtomY}`
+      list.children[2].innerHTML += ` ${innerLeftTopX}:${innerLeftTopY}`
+      list.children[3].innerHTML += ` ${innerRightButtomX}:${innerRightButtomY}`
+
+      document.body.append(list)
+    </script>
+  </body>
+</html>
