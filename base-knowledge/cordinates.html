@@ -51,16 +51,16 @@
 
       const list = document.createElement("ul")
       for (let i = 1; i < 5; i++) {
-          list.append(document.createElement('li'))
-          list.lastChild.innerHTML = `<b>${i}</b>`
+          list.append(document.createElement('li'));
+          list.lastChild.innerHTML = `<b>${i}</b>`;
       }
 
-      list.children[0].innerHTML += ` ${outerLeftTopX}:${outerLeftTopY}`
-      list.children[1].innerHTML += ` ${outerRightButtomX}:${outerRightButtomY}`
-      list.children[2].innerHTML += ` ${innerLeftTopX}:${innerLeftTopY}`
-      list.children[3].innerHTML += ` ${innerRightButtomX}:${innerRightButtomY}`
+      list.children[0].innerHTML += ` ${outerLeftTopX}:${outerLeftTopY}`;
+      list.children[1].innerHTML += ` ${outerRightButtomX}:${outerRightButtomY}`;
+      list.children[2].innerHTML += ` ${innerLeftTopX}:${innerLeftTopY}`;
+      list.children[3].innerHTML += ` ${innerRightButtomX}:${innerRightButtomY}`;
 
-      document.body.append(list)
+      document.body.append(list);
     </script>
   </body>
 </html>

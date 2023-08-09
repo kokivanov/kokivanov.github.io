@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    #field {
+      width: 200px;
+      height: 150px;
+      border: 10px solid black;
+      background-color: #00FF00;
+      overflow: hidden;
+    }
+
+    #ball {
+        position: absolute;
+        display: inline-block;
+    }
+  </style>
+</head>
+
+<body style="height:2000px">
+
+  Click on a field to move the ball there.
+  <br> The ball should never leave the field.
+
+
+  <div id="field">
+    <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+  <script>
+    const ball = document.getElementById('ball');
+    ball.onload = (e) => {
+        const field = document.getElementById('field');
+    
+        const fieldRect = field.getBoundingClientRect()
+        
+        const minX = fieldRect.left + field.clientLeft
+        const minY = fieldRect.top + field.clientTop
+        
+        const maxX = minX + field.clientWidth - ball.offsetWidth    
+        const maxY = minY + field.clientHeight - ball.offsetHeight 
+    
+        console.log(ball.getClientRects())
+    
+        ball.style.left = `${minX}px`
+        ball.style.top = `${minY}px`
+    
+        field.addEventListener("click", e => {
+            console.log(e)
+            console.log(ball.style.top)
+            console.log(ball.style.left)
+            
+            let newX = e.x - (ball.offsetWidth / 2)
+            let newY = e.y - (ball.offsetHeight / 2)
+    
+            if (newX > maxX) newX = maxX
+            if (newY > maxY) newY = maxY
+    
+            if (newX < minX) newX = minX
+            if (newY < minY) newY = minY
+    
+            console.log(newX, maxX)
+    
+            ball.style.left = `${newX}px`
+            ball.style.top = `${newY}px`
+            
+        })
+    }
+  </script>
+</body>
+</html>
