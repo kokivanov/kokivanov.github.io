@@ -1,0 +1,45 @@
+<!-- Create an async function getUsers(names), that gets an array of GitHub logins, fetches the users from GitHub and returns an array of GitHub users.
+
+The GitHub url with user information for the given USERNAME is: https://api.github.com/users/USERNAME.
+
+There’s a test example in the sandbox. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="text">
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <ul id="result">
+
+    </ul>
+
+    <script>
+        document.forms[0].addEventListener("submit", Submit)
+
+        async function Submit(e) {
+            e.preventDefault();
+            const nicknames = e.target[0].value.split(", ")
+            const list = document.getElementById("result")
+            for (let nick of nicknames) {
+                const result = await fetch("https://api.github.com/users/" + nick)
+                if (result.ok) {
+                    const userObj = await result.json()
+                    console.log(userObj)
+                    const userLi = document.createElement("li")
+                    userLi.innerHTML = `<b>${userObj.login}</b> - ${userObj.id}`
+                    list.appendChild(userLi)
+                }
+            }
+        }
+    </script>
+</body>
+</html>
