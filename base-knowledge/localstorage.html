@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea style="width:200px; height: 60px;" id="area"></textarea>
+    <button id="clearButton">CLEAR</button>
+
+    <script>
+        const textarea = document.getElementById("area")
+        textarea.addEventListener("input", handleChange)
+        textarea.addEventListener("load", handleLoad)
+
+        const clearButton = document.getElementById("clearButton")
+        clearButton.addEventListener("click", handleClear)
+
+        function handleLoad(e) {
+            console.log(e)
+            let val;
+            if (val = localStorage.getItem("textarea")) {
+                e.target.value = val
+            }
+        }
+        handleLoad({target: document.getElementById("area")})
+
+        function handleChange(e) {
+            console.log(e)
+            localStorage.setItem("textarea", e.target.value)
+            console.log(localStorage.getItem("textarea"))
+        }
+
+        function handleClear(e) {
+            console.log(e)
+            localStorage.removeItem("textarea")
+            textarea.value = ''
+        }
+    </script>
+</body>
+</html>
