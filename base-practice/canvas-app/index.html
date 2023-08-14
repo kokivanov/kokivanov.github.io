@@ -5,8 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script defe src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <canvas id="drawing-area"></canvas>
+    <div id="toolbar">
+        <button id="rectangle-button" data-selection="RECTANGLE">RECTANGLE</button>
+        <button id="elipse-button" data-selection="ELIPSE">ELIPSE</button>
+        <button id="line-button" data-selection="LINE">LINE</button>
+        <button id="triangle-button" data-selection="TRIANGLE">TRIANGLE</button>
+        <input type="text" id="text-input">
+        <button id="text-button" data-selection="TEXT">TEXT</button>
+        <input type="file" id="img-input" accept="image/*">
+        <button id="image-button" data-selection="IMAGE">IMAGE</button>
+    </div>
+    <div>
+        <canvas id="drawing-area"></canvas>
+        <p id="cur-position"></p>
+    </div>
 </body>
 </html>
