@@ -1,0 +1,7 @@
+#drawing-area {
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    min-height: 100%;
+    min-width: 90%;
+}
