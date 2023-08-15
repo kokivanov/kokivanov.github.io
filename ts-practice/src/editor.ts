@@ -1,4 +1,13 @@
-import {SelectOptions, Shape, ImageElem, TextElem, Rectangle, Triangle, Elipse, Line} from "./elements"
+import {
+  SelectOptions,
+  Shape,
+  ImageElem,
+  TextElem,
+  Rectangle,
+  Triangle,
+  Elipse,
+  Line,
+} from "./elements";
 
 export class Editor {
   ctx: CanvasRenderingContext2D;
@@ -21,9 +30,28 @@ export class Editor {
     }
   }
 
-  addAuto(x: number, y: number) {
-    const h = Math.ceil(Math.random() * 300);
-    const w = Math.ceil(Math.random() * 300);
+  drawPreviw(path: Path2D) {
+    this.ctx.save()
+    this.ctx.fillStyle = ''
+    this.ctx.strokeStyle = "blue"
+    this.ctx.stroke(path)
+    this.ctx.restore()
+  }
+
+  renderPreviw(x : number, y : number, h: number, w : number) {
+    const path = new Path2D()
+    path.rect(x, y, w, h)
+    
+    this.render()
+    this.drawPreviw(path)
+  }
+
+  addAuto(
+    x: number,
+    y: number,
+    h: number = Math.ceil(Math.random() * 300),
+    w: number = Math.ceil(Math.random() * 300)
+  ) {
     switch (this.selection) {
       case SelectOptions.RECTANGLE:
         this.addElement(new Rectangle({ x, y, h, w }));
@@ -32,7 +60,7 @@ export class Editor {
         this.addElement(new Elipse({ x, y, h, w }));
         break;
       case SelectOptions.LINE:
-        this.addElement(new Line({ x, y, x2: x + h, y2: y + w }));
+        this.addElement(new Line({ x, y, x2: x + w, y2: y + h }));
         break;
       case SelectOptions.TRIANGLE:
         this.addElement(new Triangle({ x, y, h, w }));
@@ -43,7 +71,7 @@ export class Editor {
           TypeError("Must provide input element");
         else {
           this.addElement(
-            new TextElem({ x, y, value: textInput.value, fontSize: h })
+            new TextElem({ x, y: y+h, value: textInput.value, fontSize: h })
           );
         }
         break;
