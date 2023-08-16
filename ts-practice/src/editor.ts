@@ -30,49 +30,41 @@ export class Editor {
     }
   }
 
-  drawPreviw(path: Path2D) {
-    this.ctx.save()
-    this.ctx.fillStyle = ''
-    this.ctx.strokeStyle = "blue"
-    this.ctx.stroke(path)
-    this.ctx.restore()
-  }
-
-  renderPreviw(x : number, y : number, h: number, w : number) {
-    const path = new Path2D()
-    path.rect(x, y, w, h)
-    
+  drawPreviw(elem: Shape) {
     this.render()
-    this.drawPreviw(path)
+    elem.drawTry(this.ctx)
   }
 
-  addAuto(
-    x: number,
-    y: number,
-    h: number = Math.ceil(Math.random() * 300),
-    w: number = Math.ceil(Math.random() * 300)
-  ) {
+  renderPreviw(x: number, y: number, h: number, w: number) {
+    const path = this.selectionToElement(x, y, h, w);
+    console.log("TRying render preview")
+
+    if (path) {
+      this.drawPreviw(path);
+    }
+  }
+
+  selectionToElement(x: number, y: number, h: number, w: number) {
     switch (this.selection) {
       case SelectOptions.RECTANGLE:
-        this.addElement(new Rectangle({ x, y, h, w }));
-        break;
+        return new Rectangle({ x, y, h, w });
       case SelectOptions.ELIPSE:
-        this.addElement(new Elipse({ x, y, h, w }));
-        break;
+        return new Elipse({ x, y, h, w });
       case SelectOptions.LINE:
-        this.addElement(new Line({ x, y, x2: x + w, y2: y + h }));
-        break;
+        return new Line({ x, y, x2: x + w, y2: y + h });
       case SelectOptions.TRIANGLE:
-        this.addElement(new Triangle({ x, y, h, w }));
-        break;
+        return new Triangle({ x, y, h, w });
       case SelectOptions.TEXT:
         const textInput = document.getElementById("text-input");
         if (!(textInput instanceof HTMLInputElement))
           TypeError("Must provide input element");
         else {
-          this.addElement(
-            new TextElem({ x, y: y+h, value: textInput.value, fontSize: h })
-          );
+          return new TextElem({
+            x,
+            y: y + h,
+            value: textInput.value,
+            fontSize: h,
+          });
         }
         break;
       case SelectOptions.IMAGE:
@@ -81,14 +73,29 @@ export class Editor {
           throw TypeError("Must provide input element");
         if (inputElement.files) {
           const imgSrc = inputElement.files[0];
-          this.addElement(
-            new ImageElem({ x, y, src: URL.createObjectURL(imgSrc), h, w })
-          );
+          return new ImageElem({
+            x,
+            y,
+            src: URL.createObjectURL(imgSrc),
+            h,
+            w,
+          });
         } else {
           alert("No image selected.");
           return;
         }
-        break;
+    }
+  }
+
+  addAuto(
+    x: number,
+    y: number,
+    h: number = Math.ceil(Math.random() * 300),
+    w: number = Math.ceil(Math.random() * 300)
+  ) {
+    const elem = this.selectionToElement(x, y, h, w);
+    if (elem) {
+      this.addElement(elem)
     }
   }
 
@@ -107,11 +114,13 @@ export class Editor {
     });
   }
 
+  clear() {
+    this.ctx.clearRect(0, 0, this.canvas.clientWidth, this.canvas.clientHeight);
+    this.elements = []
+  }
+  
   render() {
-    this.ctx.save();
-    this.ctx.fillStyle = "#FFFFFF";
-    this.ctx.fillRect(0, 0, this.canvas.clientWidth, this.canvas.clientHeight);
-    this.ctx.restore();
+    this.ctx.clearRect(0, 0, this.canvas.clientWidth, this.canvas.clientHeight);
 
     for (let element of this.elements) {
       element.draw(this.ctx);

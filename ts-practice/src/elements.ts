@@ -26,6 +26,10 @@ class ElementBase {
   draw(ctx: CanvasRenderingContext2D) {
     throw new ReferenceError("NotImplemented");
   }
+
+  drawTry(ctx: CanvasRenderingContext2D) {
+    throw new ReferenceError("NotImplemented");
+  }
 }
 
 export class ShapeBase extends ElementBase {
@@ -49,6 +53,14 @@ export class ShapeBase extends ElementBase {
     ctx.fillStyle = this.fillStyle;
     ctx.strokeStyle = this.strokeStyle;
     ctx.fill(this.path);
+    ctx.stroke(this.path);
+    ctx.restore();
+  }
+
+  drawTry(ctx: CanvasRenderingContext2D) {
+    ctx.save();
+    ctx.fillStyle = '';
+    ctx.strokeStyle = 'blue';
     ctx.stroke(this.path);
     ctx.restore();
   }
@@ -100,6 +112,13 @@ export class Line extends ElementBase {
     ctx.stroke(this.path);
     ctx.restore();
   }
+
+  drawTry(ctx: CanvasRenderingContext2D) {
+    ctx.save();
+    ctx.strokeStyle = "blue";
+    ctx.stroke(this.path);
+    ctx.restore();
+  }
 }
 
 export class Elipse extends ShapeBase {
@@ -145,22 +164,36 @@ export class TextElem extends ElementBase {
     ctx.strokeText(this.value, this.x, this.y);
     ctx.restore();
   }
+
+  drawTry(ctx: CanvasRenderingContext2D) {
+    ctx.save();
+    ctx.font = `${this.fontSize}px serif`;
+    ctx.fillStyle = "blue";
+    ctx.fillText(this.value, this.x, this.y);
+    ctx.restore();
+  }
 }
 
 export class ImageElem extends ShapeBase {
   img = new Image();
   imgSrc: string;
+  isLoaded = false;
   constructor(params: ImageParams) {
     super(params);
     this.imgSrc = params.src;
-    console.log(this);
+    this.path.rect(this.x, this.y, this.width, this.height)
   }
 
   draw(ctx: CanvasRenderingContext2D) {
     this.img.src = this.imgSrc;
-    this.img.addEventListener("load", () => {
+    if (this.isLoaded) {
       ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    });
+    } else {
+      this.img.addEventListener("load", () => {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        this.isLoaded = true
+      });
+    }
   }
 }
 

@@ -15,6 +15,11 @@ window.addEventListener("load", () => {
       if (e.target && !(e.target instanceof HTMLButtonElement)) return;
       else if (curSelection) {
         const target = e.target as HTMLElement;
+        if (target.dataset.selection == "CLEAR") {
+          editor.clear();
+          return;
+        }
+
         curSelection.style.backgroundColor = target.style.backgroundColor;
         curSelection = e.target as HTMLElement;
         curSelection.style.backgroundColor = "green";
