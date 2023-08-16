@@ -1,41 +1,22 @@
 import "./index.css";
-import { SelectOptions } from "./elements";
+import { SelectOptions } from "./types";
 import { Editor } from "./editor";
 import { deepEqual } from "./objEqual";
 
 window.addEventListener("load", () => {
   const toolbar = document.getElementById("toolbar");
   let curSelection = document.getElementById("rectangle-button");
+  let lastSelection = document.getElementById("rectangle-button");
+  const cursorPosition = document.getElementById("cur-position");
+  const canvas = document.getElementById("drawing-area");
 
   let editor: Editor;
-
-  if (curSelection && toolbar) {
-    curSelection.style.backgroundColor = "green";
-    toolbar.addEventListener("click", (e) => {
-      if (e.target && !(e.target instanceof HTMLButtonElement)) return;
-      else if (curSelection) {
-        const target = e.target as HTMLElement;
-        if (target.dataset.selection == "CLEAR") {
-          editor.clear();
-          return;
-        }
-
-        curSelection.style.backgroundColor = target.style.backgroundColor;
-        curSelection = e.target as HTMLElement;
-        curSelection.style.backgroundColor = "green";
-        editor.changeSelection(target.dataset.selection as SelectOptions);
-      }
-    });
-  }
 
   const findCurPos = (e: MouseEvent) => {
     if (cursorPosition) {
       cursorPosition.innerText = `Cursor position: (x:${e.offsetX}, y:${e.offsetY})`;
     }
   };
-
-  const cursorPosition = document.getElementById("cur-position");
-  const canvas = document.getElementById("drawing-area");
 
   // On mouse down
   const mouseDraw = (e: MouseEvent) => {
@@ -68,7 +49,6 @@ window.addEventListener("load", () => {
         if (event instanceof MouseEvent) {
           const endPos = { x: event.offsetX, y: event.offsetY };
 
-          console.log(startPos, endPos);
 
           if (deepEqual(startPos, endPos)) {
             editor.addAuto(startPos.x, startPos.y);
@@ -96,5 +76,53 @@ window.addEventListener("load", () => {
     canvas.addEventListener("mousedown", mouseDraw);
   } else {
     throw TypeError("Cant work with provided canvas");
+  }
+
+  if (curSelection && toolbar) {
+    curSelection.style.backgroundColor = "green";
+
+    editor.onSelectionChange = (s) => {
+      if (curSelection && lastSelection) {
+        if (curSelection.dataset.selection !== s) {
+          const tmp = lastSelection;
+          curSelection.style.backgroundColor = lastSelection.style.backgroundColor;
+          lastSelection.style.backgroundColor = "green";
+          lastSelection = curSelection;
+          curSelection = tmp;
+        }
+      }
+    };
+
+    window.addEventListener("focus", () => {
+      if (curSelection && lastSelection) {
+        if (
+          (curSelection.dataset.selection as SelectOptions) !== editor.selection
+        ) {
+
+          const tmp = lastSelection;
+          curSelection.style.backgroundColor = lastSelection.style.backgroundColor;
+          lastSelection.style.backgroundColor = "green";
+          lastSelection = curSelection;
+          curSelection = tmp;
+        }
+      }
+    });
+
+    toolbar.addEventListener("click", (e) => {
+      if (e.target && !(e.target instanceof HTMLButtonElement)) return;
+      else if (curSelection) {
+        const target = e.target as HTMLElement;
+        if (target.dataset.selection == "CLEAR") {
+          editor.clear();
+          return;
+        }
+
+        lastSelection = curSelection;
+        curSelection.style.backgroundColor = target.style.backgroundColor;
+        curSelection = e.target as HTMLElement;
+        editor.changeSelection(target.dataset.selection as SelectOptions);
+        curSelection.style.backgroundColor = "green";
+      }
+    });
   }
 });

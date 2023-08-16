@@ -5,7 +5,7 @@ export interface BaseParams {
   name?: string;
 }
 
-export interface HYParams {
+export interface HWParams {
   h?: number;
   w?: number;
 }
@@ -14,20 +14,23 @@ export interface FillParams {
   fillStyle?: string;
 }
 
-export interface ShapeParams extends BaseParams, HYParams, FillParams {
+export interface ShapeParams extends BaseParams, HWParams {
   r?: number;
 }
 
-export interface LineParams extends BaseParams, HYParams {
+export interface FillShapeParams extends ShapeParams, FillParams {
+}
+
+export interface LineParams extends BaseParams {
   x2?: number;
   y2?: number;
 }
 
 export interface TextParams extends BaseParams, FillParams {
   value: string;
-  fontSize: number;
+  fontSize?: number;
 }
 
-export interface ImageParams extends BaseParams, HYParams {
+export interface ImageParams extends BaseParams, HWParams {
   src: string;
 }
