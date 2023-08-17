@@ -1,7 +1,7 @@
-import { ImageElem, TextElem, Line, Elipse, Rectangle, Triangle } from "./elements";
+import { ImageElem, TextElem, Line, Ellipse, Rectangle, Triangle } from "../elements";
 
 export type stylingParams = string | CanvasGradient | CanvasPattern;
-export type Shape = ImageElem | TextElem | Line | Elipse | Rectangle | Triangle;
+export type Shape = ImageElem | TextElem | Line | Ellipse | Rectangle | Triangle;
 
 export enum SelectOptions {
   RECTANGLE = "RECTANGLE",

@@ -1,7 +1,7 @@
 import "./index.css";
-import { SelectOptions } from "./types";
+import { SelectOptions } from "./utils/types";
 import { Editor } from "./editor";
-import { deepEqual } from "./objEqual";
+import { deepEqual } from "./utils/objEqual";
 
 window.addEventListener("load", () => {
   const toolbar = document.getElementById("toolbar");
@@ -78,6 +78,7 @@ window.addEventListener("load", () => {
     throw TypeError("Cant work with provided canvas");
   }
 
+  // Highlighting recently pressed button
   if (curSelection && toolbar) {
     curSelection.style.backgroundColor = "green";
 

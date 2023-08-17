@@ -3,79 +3,36 @@ import {
   TextElem,
   Rectangle,
   Triangle,
-  Elipse,
+  Ellipse,
   Line,
 } from "./elements";
-import { SelectOptions, Shape } from "./types";
-
-function makeValidElipse(x: number, y: number, h?: number, w?: number) {
-  if (h && h < 0) {
-    y = y + h;
-    h = Math.abs(h);
-  }
-
-  if (w && w < 0) {
-    x = x + w;
-    w = Math.abs(w);
-  }
-  return new Elipse({ x, y, h, w });
-}
-
-function makeValidText(value: string, x: number, y: number, h?: number) {
-  if (value) {
-    return new TextElem({
-      x,
-      y: y + (h || 0),
-      value: value,
-      fontSize: h,
-    });
-  } else {
-    alert("Cant write no text");
-    return;
-  }
-}
-
-function makeValidImage(
-  src: string,
-  x: number,
-  y: number,
-  h?: number,
-  w?: number
-) {
-  if (src) {
-    return new ImageElem({
-      x,
-      y,
-      src: src,
-      h,
-      w,
-    });
-  } else {
-    alert("No image selected.");
-    return;
-  }
-}
+import { makeValidElipse, makeValidImage, makeValidText } from "./utils";
+import { SelectOptions, Shape } from "./utils/types";
 
 export class Editor {
-  ctx: CanvasRenderingContext2D;
-  elements: Array<Shape>;
-  selection: SelectOptions = SelectOptions.RECTANGLE;
+  private _ctx: CanvasRenderingContext2D;
+  private _elements: Array<Shape>;
+  private _selection: SelectOptions = SelectOptions.RECTANGLE;
 
-  textValue = "";
-  imgSrc: string = "";
+  private _textValue = "";
+  private _imgSrc: string = "";
 
   onSelectionChange = (selection : SelectOptions) => {}
 
-  constructor(private canvas: HTMLCanvasElement, elements: Array<Shape> = []) {
+  get selection() {
+    return this._selection
+  }
+
+  constructor(private readonly canvas: HTMLCanvasElement, elements: Array<Shape> = []) {
     if (canvas instanceof HTMLCanvasElement) {
       this.canvas.height = this.canvas.clientHeight;
       this.canvas.width = this.canvas.clientWidth;
       let context: CanvasRenderingContext2D | null;
       if (!(context = canvas.getContext("2d")))
         throw TypeError("Please provide valid canvas element");
-      this.ctx = context;
-      this.elements = elements || [];
-      this.selection = SelectOptions.RECTANGLE;
+      this._ctx = context;
+      this._elements = elements || [];
+      this._selection = SelectOptions.RECTANGLE;
 
       this.render();
     } else {
@@ -85,7 +42,7 @@ export class Editor {
 
   drawPreviw(elem: Shape) {
     this.render();
-    elem.drawTry(this.ctx);
+    elem.drawTry(this._ctx);
   }
 
   renderPreviw(x: number, y: number, h: number, w: number) {
@@ -97,7 +54,7 @@ export class Editor {
   }
 
   selectionToElement(x: number, y: number, h?: number, w?: number) {
-    switch (this.selection) {
+    switch (this._selection) {
       case SelectOptions.RECTANGLE:
         return new Rectangle({ x, y, h, w });
       case SelectOptions.ELIPSE:
@@ -112,9 +69,9 @@ export class Editor {
       case SelectOptions.TRIANGLE:
         return new Triangle({ x, y, h, w });
       case SelectOptions.TEXT:
-        return makeValidText(this.textValue, x, y, h);
+        return makeValidText(this._textValue, x, y, h);
       case SelectOptions.IMAGE:
-        return makeValidImage(this.imgSrc, x, y, h, w);
+        return makeValidImage(this._imgSrc, x, y, h, w);
     }
   }
 
@@ -126,12 +83,12 @@ export class Editor {
   }
 
   changeSelection(option: SelectOptions = SelectOptions.RECTANGLE) {
-    if (option !== this.selection) {
+    if (option !== this._selection) {
       if (option === SelectOptions.TEXT) {
-        const input = prompt("Eneter text", this.textValue) || "";
+        const input = prompt("Eneter text", this._textValue) || "";
         if (input) {
-          this.textValue = input;
-          this.selection = option;
+          this._textValue = input;
+          this._selection = option;
         } else {
           alert("Cant render empty string");
         }
@@ -147,16 +104,16 @@ export class Editor {
           if (inputElement.files && inputElement.files.length > 0) {
             const imgSrc = inputElement.files[0];
             if (imgSrc) {
-              this.imgSrc = URL.createObjectURL(imgSrc);
-              this.selection = option;
-              this.onSelectionChange(this.selection)
+              this._imgSrc = URL.createObjectURL(imgSrc);
+              this._selection = option;
+              this.onSelectionChange(this._selection)
             } else {
               alert("No image was selected");
             }
           } else {
             alert("No image was selected")
-            this.selection = SelectOptions.RECTANGLE;
-            this.onSelectionChange(this.selection)
+            this._selection = SelectOptions.RECTANGLE;
+            this.onSelectionChange(this._selection)
             const rectButton = document.getElementById("rectangle-button");
             if (rectButton) {
               rectButton.click.apply(rectButton);
@@ -164,34 +121,34 @@ export class Editor {
           }
         });
       } else {
-        this.selection = option;
+        this._selection = option;
       }
 
-      this.onSelectionChange(this.selection)
+      this.onSelectionChange(this._selection)
     }
   }
 
   addElement(elem: Shape) {
-    this.elements.push(elem);
+    this._elements.push(elem);
     this.render();
   }
 
   removeElem(elemName: string) {
-    this.elements = this.elements.filter((v) => {
+    this._elements = this._elements.filter((v) => {
       return v.name != elemName;
     });
   }
 
   clear() {
-    this.ctx.clearRect(0, 0, this.canvas.clientWidth, this.canvas.clientHeight);
-    this.elements = [];
+    this._ctx.clearRect(0, 0, this.canvas.clientWidth, this.canvas.clientHeight);
+    this._elements = [];
   }
 
   render() {
-    this.ctx.clearRect(0, 0, this.canvas.clientWidth, this.canvas.clientHeight);
+    this._ctx.clearRect(0, 0, this.canvas.clientWidth, this.canvas.clientHeight);
 
-    for (let element of this.elements) {
-      element.draw(this.ctx);
+    for (let element of this._elements) {
+      element.draw(this._ctx);
     }
   }
 }
