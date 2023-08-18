@@ -1,0 +1,8 @@
+<div class="flex-row mt-4 shadow-lg p-5 flex place-content-between rounded-md border-gray-300 border-2 hover:border-blue-500">
+  <div class="w-3/4 inline-block">
+    <p>{{src.desc}}</p>
+    <p>{{src.time}}</p>
+    <p>{{src.isComplete ? "Complete" : "Not complete"}}</p>
+  </div>
+  <button class="text-xl text-red-600 border-red-500 hover:border-2 h-8 w-8 my-auto rounded-3xl" (click)="onDeleteClick()"><fa-icon [icon]="ico"></fa-icon></button>
+</div>

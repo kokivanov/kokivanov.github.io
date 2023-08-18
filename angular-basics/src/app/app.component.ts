@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CatsService } from './services/cats.service';
 
 @Component({
   selector: 'app-root',
@@ -7,20 +6,11 @@ import { CatsService } from './services/cats.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  imgSrc : string;
 
-  constructor(private catsService : CatsService ) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.catsService.getCat().subscribe(data => {
-      this.imgSrc = this.catsService.baseUrl + data.url
-    })
-  }
 
-  updateImage() {
-    this.catsService.getCat().subscribe(data => {
-      this.imgSrc = this.catsService.baseUrl + data.url
-    })
   }
 }

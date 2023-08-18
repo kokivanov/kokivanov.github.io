@@ -1,0 +1,10 @@
+<form [formGroup]="myForm" (ngSubmit)="onCreate()">
+  <label for="desc">Note:</label>
+  <input class="border-gray-300 border-2 px-2 py-1 rounded-md hover:border-blue-500 focus:border-blue-500" type="text" id="desc" formControlName="desc" /><br />
+  <label for="time">Time:</label>
+  <input class="border-gray-300 border-2 px-2 py-1 rounded-md hover:border-blue-500 focus:border-blue-500" type="datetime-local" id="time" formControlName="time" /><br />
+  <label for="isComplete">Is complete:</label>
+  <input class="border-gray-300 border-2 px-2 py-1 rounded-md hover:border-blue-500 focus:border-blue-500" type="checkbox" id="isComplete" formControlName="isComplete" /><br />
+
+  <input class="border-gray-300 border-2 px-2 py-1 rounded-md hover:border-blue-500 focus:border-blue-500" type="submit" value="Add" [disabled]="!myForm.valid"/>
+</form> 
