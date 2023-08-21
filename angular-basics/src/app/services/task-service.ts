@@ -1,17 +1,16 @@
+import { Injectable } from '@angular/core';
 import { Task } from '../entities/task';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class TaskService {
-  tasks: Task[];
-
-  constructor() {}
-
   vipeTasks() {
-    this.tasks = []
     localStorage.removeItem('task-list')
-    return this.tasks
+    return []
   }
 
-  removeTask(id: number) {
+  public removeTask(id: number) {
     const storageData = localStorage.getItem('task-list');
     if (storageData) {
       const taskList = JSON.parse(storageData) as Task[];
@@ -23,7 +22,7 @@ export class TaskService {
     }
   }
 
-  changeTask(id: number, val: Task) {
+  public changeTask(id: number, val: Task) {
     const storageData = localStorage.getItem('task-list');
     if (storageData) {
       const taskList = JSON.parse(storageData) as Task[];
@@ -35,7 +34,7 @@ export class TaskService {
     }
   }
 
-  addTask(val: Task) {
+  public addTask(val: Task) {
     const storageData = localStorage.getItem('task-list');
     if (storageData) {
       const taskList = JSON.parse(storageData) as Task[];
@@ -51,7 +50,7 @@ export class TaskService {
     }
   }
 
-  getTasks() {
+  public getTasks() {
     const storageData = localStorage.getItem('task-list');
     if (storageData) {
       return JSON.parse(storageData) as Task[];
