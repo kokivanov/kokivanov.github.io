@@ -1,9 +1,4 @@
-<h2>{{ hero.name | uppercase }}</h2>
-<div>ID: <span>{{ hero.id }}</span></div>
-<div>Name: <span>{{ hero.name }}</span></div>
-
-<div>
-  <label for="name"></label>
-  <input type="text" [(ngModel)]="hero.name" placeholder="name">
-  
-</div>
+<button class="hero-splash" (click)="onClick(hero)">
+  <span class="hero-id">{{ hero.id }}</span>
+  <span class="hero-name">{{ hero.name }}</span>
+</button>

@@ -1,0 +1,36 @@
+.hero-splash {
+  background-color: rgba($color: #000000, $alpha: 0);
+  border: none;
+  font-size: 2em;
+  font-weight: 600;
+  display: block;
+
+
+  &:hover {
+    cursor: pointer;
+
+    .hero-name {
+      background-color: #999999;
+    }
+  }
+
+
+  .hero-id {
+    padding: 0.2em;
+    padding-left: 0.6em;
+    padding-right: 0.3em;
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+    background-color: rgb(62, 62, 62);
+    color: #FFF;
+  }
+
+  .hero-name {
+    color: #333333;
+    padding: 0.2em;
+    padding-right: 0.6em;
+    background-color: #e2e2e2;
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
+  }
+}

@@ -1,0 +1,6 @@
+<h2 id="hero-form-header">{{selectedHero.name | uppercase}} details:</h2>
+<div id="hero-form-id">ID: {{selectedHero.id}}</div>
+<div>
+  <label id="hero-form-name-label" for="name">Name:</label>
+  <input id="hero-form-input" type="text" [(ngModel)]="selectedHero.name" placeholder="name">
+</div>
