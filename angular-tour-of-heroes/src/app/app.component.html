@@ -1,6 +1,7 @@
 <h1 class="title">{{ title }}</h1>
-<div class="hero-list">
-  <app-heroes  *ngFor="let hero of heroes" [hero]="hero" (clickEvent)="onHeroClick(hero)"></app-heroes>
-</div>
+<nav>
+  <a routerLink="/messages">Messages</a>
+  <a routerLink="/">Hero list</a>
+</nav>
 
-<app-hero-form class="selecter-hero" *ngIf="selectedHero" [selectedHero]="selectedHero"></app-hero-form>
+<router-outlet></router-outlet>

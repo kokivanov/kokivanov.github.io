@@ -1,0 +1,7 @@
+<div class="hero-list">
+  <app-heroes  *ngFor="let hero of heroes" [hero]="hero" (clickEvent)="onHeroClick(hero)"></app-heroes>
+</div>
+
+<app-hero-form class="selecter-hero" *ngIf="selectedHero" [selectedHero]="selectedHero"></app-hero-form>
+
+<app-messages></app-messages>
