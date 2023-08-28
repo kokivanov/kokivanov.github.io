@@ -4,3 +4,6 @@
   <label id="hero-form-name-label" for="name">Name:</label>
   <input id="hero-form-input" type="text" [(ngModel)]="selectedHero.name" placeholder="name">
 </div>
+
+<button type="button" (click)="save()">save</button>
+<a routerLink="{{returnUrl}}">Back</a>

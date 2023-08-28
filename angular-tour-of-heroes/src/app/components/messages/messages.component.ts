@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
@@ -7,5 +7,7 @@ import { MessagesService } from 'src/app/services/messages.service';
   styleUrls: ['./messages.component.sass']
 })
 export class MessagesComponent {
+  @Input() public returnUrl! : string;
+
   constructor(public messagesService : MessagesService) {}
 }

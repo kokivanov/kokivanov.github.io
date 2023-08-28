@@ -1,7 +1,14 @@
-<div class="hero-list">
-  <app-heroes  *ngFor="let hero of heroes" [hero]="hero" (clickEvent)="onHeroClick(hero)"></app-heroes>
+<div>
+  <label for="new-hero">Hero name: </label>
+  <input id="new-hero" #heroName />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button type="button" class="add-button" (click)="add(heroName.value); heroName.value=''">
+    Add hero
+  </button>
 </div>
 
-<app-hero-form class="selecter-hero" *ngIf="selectedHero" [selectedHero]="selectedHero"></app-hero-form>
 
-<app-messages></app-messages>
+<div class="hero-list">
+  <app-heroes  *ngFor="let hero of heroes" [hero]="hero"></app-heroes>
+</div>
