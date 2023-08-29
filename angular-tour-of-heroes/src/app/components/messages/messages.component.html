@@ -1,9 +1,12 @@
-<div *ngIf="messagesService.messages.length">
-
-  <h2>Messages</h2>
-  <button type="button" class="clear"
-          (click)="messagesService.clear()">Clear messages</button>
-  <div *ngFor='let message of messagesService.messages'> {{message}} </div>
-
-  <a routerLink="{{returnUrl}}">Back</a>
+<div id="app-content">
+  <div id="messages-content" *ngIf="hasMessages()">
+    <h2>Messages</h2>
+    <button type="button" class="button" (click)="clickClear()">
+      Clear messages
+    </button>
+    <div id="messages-list" *ngFor="let message of messages">
+      {{ message }}
+    </div>
+  </div>
+  <app-back-button></app-back-button>
 </div>

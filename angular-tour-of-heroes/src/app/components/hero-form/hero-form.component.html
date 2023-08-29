@@ -1,9 +1,18 @@
-<h2 id="hero-form-header">{{selectedHero.name | uppercase}} details:</h2>
-<div id="hero-form-id">ID: {{selectedHero.id}}</div>
-<div>
-  <label id="hero-form-name-label" for="name">Name:</label>
-  <input id="hero-form-input" type="text" [(ngModel)]="selectedHero.name" placeholder="name">
-</div>
+<div id="hero-form" *ngIf="selectedHero">
+  <h2 id="hero-form-header">{{ selectedHero.name | uppercase }} details:</h2>
+  <div id="hero-form-id">ID: {{ selectedHero.id }}</div>
+  <div>
+    <label id="hero-form-name-label" for="name">Name:</label>
+    <input
+      id="hero-form-input"
+      type="text"
+      [(ngModel)]="selectedHero.name"
+      placeholder="name"
+    />
+  </div>
 
-<button type="button" (click)="save()">save</button>
-<a routerLink="{{returnUrl}}">Back</a>
+  <div id="controls">
+    <button class="button" type="button" (click)="save()">Save</button>
+    <app-back-button></app-back-button>
+  </div>
+</div>

@@ -3,60 +3,58 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
-import { Hero } from '../entities/hero';
+import { IHero } from '../entities/hero';
 import { MessagesService } from './messages.service';
-
 
 @Injectable({ providedIn: 'root' })
 export class HeroService {
+  private heroesUrl = 'api/heroes'; // URL to web api
 
-  private heroesUrl = 'api/heroes';  // URL to web api
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  private _httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
   constructor(
     private http: HttpClient,
-    private messagesService: MessagesService) { }
+    private messagesService: MessagesService
+  ) {}
 
   /** GET heroes from the server */
-  get(): Observable<Hero[]> {
-    this.messagesService.add("Fetching heroes")
-    return this.http.get<Hero[]>(this.heroesUrl);
+  public get(): Observable<IHero[]> {
+    this.messagesService.add('Fetching heroes');
+    return this.http.get<IHero[]>(this.heroesUrl);
   }
 
   /** GET hero by id. Return `undefined` when id not found */
-  getOr404<Data>(id: number): Observable<Hero[]> {
-    this.messagesService.add("Fetching heroes")
+  public getOr404(id: number): Observable<IHero[]> {
+    this.messagesService.add('Fetching heroes');
     const url = `${this.heroesUrl}/?id=${id}`;
-    return this.http.get<Hero[]>(url);
+    return this.http.get<IHero[]>(url);
   }
 
-  getById(id: number): Observable<Hero> {
+  public getById(id: number): Observable<IHero> {
     const url = `${this.heroesUrl}/${id}`;
-    return this.http.get<Hero>(url);
+    return this.http.get<IHero>(url);
   }
 
-  searchHeroes(term: string): Observable<Hero[]> {
+  public searchHeroes(term: string): Observable<IHero[]> {
     if (!term.trim()) {
       return of([]);
     }
-    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`);
+    return this.http.get<IHero[]>(`${this.heroesUrl}/?name=${term}`);
   }
 
-  postHero(hero: Hero): Observable<Hero> {
-    return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions);
+  public postHero(hero: IHero): Observable<IHero> {
+    return this.http.post<IHero>(this.heroesUrl, hero, this._httpOptions);
   }
-  
-  deleteHero(id: number): Observable<Hero> {
+
+  public deleteHero(id: number): Observable<IHero> {
     const url = `${this.heroesUrl}/${id}`;
 
-    return this.http.delete<Hero>(url, this.httpOptions);
+    return this.http.delete<IHero>(url, this._httpOptions);
   }
 
-  putHero(hero: Hero): Observable<any> {
-    return this.http.put(this.heroesUrl, hero, this.httpOptions);
+  public putHero(hero: IHero): Observable<any> {
+    return this.http.put(this.heroesUrl, hero, this._httpOptions);
   }
-
 }

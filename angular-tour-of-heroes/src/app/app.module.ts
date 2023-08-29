@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BackButtonComponent } from './components/back-button/back-button.component';
 import { HeroFormComponent } from './components/hero-form/hero-form.component';
 import { HeroListComponent } from './components/hero-list/hero-list.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
@@ -18,7 +19,8 @@ import { InMemoryDataService } from './services/in-memory-data.service';
     HeroesComponent,
     HeroFormComponent,
     HeroListComponent,
-    MessagesComponent
+    MessagesComponent,
+    BackButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,11 +28,11 @@ import { InMemoryDataService } from './services/in-memory-data.service';
     FormsModule,
     HttpClientModule,
 
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      dataEncapsulation: false,
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

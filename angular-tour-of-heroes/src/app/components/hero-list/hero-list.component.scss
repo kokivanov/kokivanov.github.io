@@ -3,3 +3,9 @@ app-heroes {
   width: min-content;
   margin: 1em;
 }
+
+#new-hero-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Hero } from '../entities/hero';
+import { IHero } from '../entities/hero';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InMemoryDataService implements InMemoryDbService {
-  createDb() {
-    const heroes = [
+  public createDb(): { heroes: IHero[] } {
+    const heroes: IHero[] = [
       { id: 12, name: 'Dr. Nice' },
       { id: 13, name: 'Bombasto' },
       { id: 14, name: 'Celeritas' },
@@ -16,12 +16,14 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 17, name: 'Dynama' },
       { id: 18, name: 'Dr. IQ' },
       { id: 19, name: 'Magma' },
-      { id: 20, name: 'Tornado' }
+      { id: 20, name: 'Tornado' },
     ];
-    return {heroes};
+    return { heroes };
   }
 
-  genId(heroes: Hero[]): number {
-    return heroes.length > 0 ? Math.max(...heroes.map(hero => hero.id)) + 1 : 11;
+  public genId(heroes: IHero[]): number {
+    return heroes.length > 0
+      ? Math.max(...heroes.map((hero) => hero.id)) + 1
+      : 11;
   }
 }

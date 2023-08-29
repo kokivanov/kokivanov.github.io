@@ -1,20 +1,19 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Hero } from 'src/app/entities/hero';
-
+import { IHero } from 'src/app/entities/hero';
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.scss']
+  styleUrls: ['./heroes.component.scss'],
 })
 export class HeroesComponent {
-  @Input() public hero!: Hero;
+  @Input() public hero: IHero;
   @Output() public clickEvent = new EventEmitter();
 
-  constructor(private readonly router : Router) {}
+  constructor(private readonly router: Router) {}
 
-  public onClick(hero: Hero) {
-  this.router.navigate(["/heroes", this.hero.id])
+  public onClick() {
+    this.router.navigate(['/heroes', this.hero.id]);
   }
 }

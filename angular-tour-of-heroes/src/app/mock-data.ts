@@ -1,6 +1,6 @@
-import { Hero } from './entities/hero';
+import { IHero } from './entities/hero';
 
-export const HEROES: Hero[] = [
+export const HEROES: IHero[] = [
   { id: 12, name: 'Dr. Nice' },
   { id: 13, name: 'Bombasto' },
   { id: 14, name: 'Celeritas' },
@@ -9,5 +9,5 @@ export const HEROES: Hero[] = [
   { id: 17, name: 'Dynama' },
   { id: 18, name: 'Dr. IQ' },
   { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
+  { id: 20, name: 'Tornado' },
 ];

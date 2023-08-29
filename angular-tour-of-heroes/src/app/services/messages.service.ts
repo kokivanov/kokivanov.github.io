@@ -1,26 +1,22 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MessagesService {
-  private _messages : string[] = []
+  private _messages: string[] = [];
 
   public get messages() {
-    return this._messages
-  } 
-  
-  public add(message : string) {
-    this._messages.push(message)
-    console.log(this._messages)
+    return this._messages;
+  }
+
+  public add(message: string) {
+    this._messages.push(message);
   }
 
   public clear() {
-    this._messages = []
-    console.log("Cleaned")
+    this._messages = [];
   }
 
-  constructor() { 
-    console.log("Created")
-  }
+  constructor() {}
 }

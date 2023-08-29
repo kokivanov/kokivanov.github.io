@@ -1,38 +1,40 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Hero } from 'src/app/entities/hero';
+import { IHero } from 'src/app/entities/hero';
 import { HeroService } from 'src/app/services/hero.service';
 import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-hero-list',
   templateUrl: './hero-list.component.html',
-  styleUrls: ['./hero-list.component.scss']
+  styleUrls: ['./hero-list.component.scss'],
 })
-export class HeroListComponent implements OnInit{
-  public heroes! : Hero[];
-  public selectedHero? : Hero;
-  @Input() public returnUrl! : string;
+export class HeroListComponent implements OnInit {
+  public heroes: IHero[];
+  public selectedHero?: IHero;
+  @Input() public returnUrl!: string;
 
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   ngOnInit(): void {
-    this.heroService.get().subscribe(heroes => this.heroes = heroes)
+    this.heroService.get().subscribe((heroes) => (this.heroes = heroes));
   }
 
   constructor(
-    private readonly heroService : HeroService,
-    private readonly messagesService: MessagesService) {}
+    private readonly heroService: HeroService,
+    private readonly messagesService: MessagesService
+  ) {}
 
-    public add(name: string): void {
-      name = name.trim();
-      if (!name) { return; }
-      this.heroService.postHero({ name } as Hero)
-        .subscribe(hero => {
-          this.heroes.push(hero);
-        });
+  public add(name: string): void {
+    name = name.trim();
+    if (!name) {
+      return;
     }
-  
+    this.heroService.postHero({ name } as IHero).subscribe((hero) => {
+      this.heroes.push(hero);
+    });
+  }
 
-  public onHeroClick(hero? : Hero) {
+  public onHeroClick(hero?: IHero) {
     this.selectedHero = hero;
-    this.messagesService.add("Selecting " + hero?.name + " hero")
+    this.messagesService.add('Selecting ' + hero?.name + ' hero');
   }
 }
