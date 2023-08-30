@@ -14,6 +14,8 @@
     </button>
   </div>
 
+  <div [appHidden]="true">Hidden text!</div>
+
   <div class="hero-list">
     <app-heroes *ngFor="let hero of heroes" [hero]="hero"></app-heroes>
   </div>

@@ -1,9 +1,12 @@
 <div id="hero-form" *ngIf="selectedHero">
-  <h2 id="hero-form-header">{{ selectedHero.name | uppercase }} details:</h2>
+  <h2 id="hero-form-header">
+    {{ selectedHero.name | heroName : "!!" }} details:
+  </h2>
   <div id="hero-form-id">ID: {{ selectedHero.id }}</div>
   <div>
-    <label id="hero-form-name-label" for="name">Name:</label>
+    <label id="hero-form-name-label" for="hero-name">Name:</label>
     <input
+      name="hero-name"
       id="hero-form-input"
       type="text"
       [(ngModel)]="selectedHero.name"
