@@ -1,0 +1,13 @@
+<div
+  [style.background-color]="
+    item.is_complete || item.completed_at ? 'green' : 'red'
+  "
+>
+  <p>
+    id: <span>{{ item.id }}</span>
+  </p>
+  <p>
+    content: <span>{{ item.content }}</span>
+  </p>
+  <a [href]="item.url">Link</a>
+</div>

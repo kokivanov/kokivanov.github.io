@@ -1,0 +1,6 @@
+<p>add-form works!</p>
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  <label for="content"></label>
+  <input type="text" name="content" id="content" formControlName="content" />
+  <input type="submit" value="Submit!" />
+</form>
