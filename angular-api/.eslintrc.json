@@ -43,15 +43,7 @@
             "style": "kebab-case"
           }
         ],
-        "@typescript-eslint/naming-convention": [
-          "error",
-          {
-            "selector": "memberLike",
-            "modifier": ["private"],
-            "format": ["camelCase"],
-            "leadingUnderscore": "require"
-          }
-        ]
+        "@typescript-eslint/naming-convention": ["error"]
       }
     },
     {
