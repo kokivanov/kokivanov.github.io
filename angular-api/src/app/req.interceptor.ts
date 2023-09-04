@@ -6,16 +6,22 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from './services/auth.service';
 
 @Injectable()
 export class ReqInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private readonly _authService: AuthService) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    console.log(request);
-    return next.handle(request);
+    const newReq = request.clone({
+      headers: request.headers.append(
+        'Authorization',
+        'Bearer ' + this._authService.apiKey
+      ),
+    });
+    return next.handle(newReq);
   }
 }

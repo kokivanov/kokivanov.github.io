@@ -11,56 +11,35 @@ export class ApiService {
   private readonly _baseUrl = 'https://api.todoist.com/rest/v2/';
   private readonly _syncUrl = 'https://api.todoist.com/sync/v9/';
   constructor(
-    private readonly authService: AuthService,
-    private readonly httpClient: HttpClient
+    private readonly _authService: AuthService,
+    private readonly _httpClient: HttpClient
   ) {}
 
   private _stateSubject = new Subject<Date>();
-  public checkState(func: (v: Date) => void) {
-    return this._stateSubject.subscribe({
-      next: func,
-    });
+  public get checkState() {
+    return this._stateSubject.asObservable();
   }
 
   public addItem(body: { content: string }) {
-    console.log('adding item with key ' + this.authService.apiKey);
-    this.httpClient
-      .post<IItem>(this._baseUrl + 'tasks', body, {
-        headers: {
-          Authorization: 'Bearer ' + this.authService.apiKey,
-          'Content-Type': 'application/json',
-        },
-      })
-      .subscribe({
-        next: () => {
-          this._stateSubject.next(new Date());
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+    console.log('adding item with key ' + this._authService.apiKey);
+    this._httpClient.post<IItem>(this._baseUrl + 'tasks', body).subscribe({
+      next: () => {
+        this._stateSubject.next(new Date());
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   public getItems(): Observable<[IItem[], IItem[]]> {
-    this.httpClient
-      .get<{ items: IItem[] }>(this._syncUrl + 'completed/get_all', {
-        headers: {
-          Authorization: 'Bearer ' + this.authService.apiKey,
-        },
-      })
+    this._httpClient
+      .get<{ items: IItem[] }>(this._syncUrl + 'completed/get_all')
       .subscribe((v) => console.log(v));
     return zip(
-      this.httpClient.get<IItem[]>(this._baseUrl + 'tasks', {
-        headers: {
-          Authorization: 'Bearer ' + this.authService.apiKey,
-        },
-      }),
-      this.httpClient
-        .get<{ items: IItem[] }>(this._syncUrl + 'completed/get_all', {
-          headers: {
-            Authorization: 'Bearer ' + this.authService.apiKey,
-          },
-        })
+      this._httpClient.get<IItem[]>(this._baseUrl + 'tasks'),
+      this._httpClient
+        .get<{ items: IItem[] }>(this._syncUrl + 'completed/get_all')
         .pipe(map((v) => v.items))
     );
   }

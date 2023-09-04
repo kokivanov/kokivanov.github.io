@@ -9,14 +9,14 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ListComponent implements OnInit {
   ngOnInit(): void {
-    this.apiService.getItems().subscribe((v: [IItem[], IItem[]]) => {
+    this._apiService.getItems().subscribe((v: [IItem[], IItem[]]) => {
       this._items = v[0].concat(v[1]);
     });
-    this.apiService.checkState(() => this.sub());
+    this._apiService.checkState.subscribe(() => this.sub());
   }
 
   private sub() {
-    this.apiService.getItems().subscribe((v: [IItem[], IItem[]]) => {
+    this._apiService.getItems().subscribe((v: [IItem[], IItem[]]) => {
       this._items = v[0].concat(v[1]);
     });
   }
@@ -26,5 +26,5 @@ export class ListComponent implements OnInit {
     return this._items;
   }
 
-  constructor(private readonly apiService: ApiService) {}
+  constructor(private readonly _apiService: ApiService) {}
 }
