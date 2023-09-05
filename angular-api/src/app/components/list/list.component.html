@@ -1,5 +1,5 @@
 <p>list works!</p>
 <app-add-form></app-add-form>
-<div *ngFor="let item of items">
+<div *ngFor="let item of items | async">
   <app-item [item]="item"></app-item>
 </div>

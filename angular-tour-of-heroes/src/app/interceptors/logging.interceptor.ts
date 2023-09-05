@@ -15,7 +15,6 @@ export class LoggingInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('Sending ' + request.method + ' request to ' + request.url);
     return next.handle(request);
   }
 }

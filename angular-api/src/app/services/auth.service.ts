@@ -11,9 +11,6 @@ export class AuthService {
   }
 
   public setApiKey(key: string) {
-    console.log('Setting key');
     this._apiKey = key;
   }
-
-  constructor() {}
 }

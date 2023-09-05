@@ -1,21 +1,19 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { CanvasRoutingModule } from './canvas-routing.module';
 import { CanvasComponent } from './canvas/canvas.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { MainComponentComponent } from './main-component/main-component.component';
 import { PropsComponent } from './props/props.component';
-
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     CanvasComponent,
     ToolbarComponent,
-    PropsComponent
+    PropsComponent,
+    MainComponentComponent,
   ],
-  imports: [
-    CommonModule,
-    CanvasRoutingModule
-  ]
+  imports: [CommonModule, CanvasRoutingModule],
 })
-export class CanvasModule { }
+export class CanvasModule {}

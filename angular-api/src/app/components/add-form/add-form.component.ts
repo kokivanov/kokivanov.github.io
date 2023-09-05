@@ -13,13 +13,13 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./add-form.component.scss'],
 })
 export class AddFormComponent {
-  itemForm = new FormGroup({
+  public itemForm = new FormGroup({
     content: new FormControl('', [Validators.required, this.notEmpty]),
   });
 
   constructor(private readonly _apiService: ApiService) {}
 
-  private notEmpty(control: AbstractControl<String>) {
+  private notEmpty(control: AbstractControl<string>) {
     return control.value.trim().length > 0 ? null : { isEmpty: true };
   }
 
