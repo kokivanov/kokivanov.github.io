@@ -20,7 +20,7 @@ export class AuthService {
     return this._user?.token;
   }
 
-  private _loginRequest(username: string, password: string) {
+  private loginRequest(username: string, password: string) {
     return this._httpClient
       .post<IUser>(this._baseUrl + 'auth/login', { username, password })
       .pipe(
@@ -38,7 +38,7 @@ export class AuthService {
     } else if ((userData = localStorage.getItem('UserData'))) {
       return of<IUser>((this._user = JSON.parse(userData)));
     } else {
-      return this._loginRequest(username, password);
+      return this.loginRequest(username, password);
     }
   }
 

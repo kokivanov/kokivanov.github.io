@@ -25,7 +25,13 @@
           }
         ],
         "@typescript-eslint/no-explicit-any": "off",
-        "indent": ["error", 2],
+        "indent": [
+          "error",
+          2,
+          {
+            "SwitchCase": 1
+          }
+        ],
         "semi": ["error", "always"],
         "@angular-eslint/directive-selector": [
           "error",

@@ -6,17 +6,20 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./main-page/main-page.module').then((m) => m.MainPageModule),
+      import('./modules/main-page/main-page.module').then(
+        (m) => m.MainPageModule
+      ),
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'canvas',
     canActivate: [authorizedGuard],
     loadChildren: () =>
-      import('./canvas/canvas.module').then((m) => m.CanvasModule),
+      import('./modules/canvas/canvas.module').then((m) => m.CanvasModule),
   },
 ];
 

@@ -5,7 +5,7 @@ import { authorizedGuard } from './authorized.guard';
 
 describe('authorizedGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => authorizedGuard(...guardParameters));
+    TestBed.runInInjectionContext(() => authorizedGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
