@@ -1,1 +1,10 @@
-<p>navbar works!</p>
+<nav>
+  <a routerLink="/">Home</a>
+  <a routerLink="/canvas">Canvas</a>
+  <a routerLink="/auth" *ngIf="!isLoggedIn()">Login</a>
+</nav>
+
+<div *ngIf="isLoggedIn()">
+  <span>{{ username }}</span>
+  <button (click)="onLogoutClick()">Logout</button>
+</div>

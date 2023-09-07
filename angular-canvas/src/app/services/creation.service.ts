@@ -13,9 +13,9 @@ export class CreationService {
   private _textValue = '';
   private _imgSrc = '';
 
-  private _selectionChange = new Subject<string>();
+  private _selectionChange$ = new Subject<string>();
   public get selectionChange() {
-    return this._selectionChange.asObservable();
+    return this._selectionChange$.asObservable();
   }
 
   public get selection() {
@@ -74,14 +74,14 @@ export class CreationService {
             if (imgSrc) {
               this._imgSrc = URL.createObjectURL(imgSrc);
               this._selection = option;
-              this._selectionChange.next(this._selection);
+              this._selectionChange$.next(this._selection);
             } else {
               alert('No image was selected');
             }
           } else {
             alert('No image was selected');
             this._selection = SelectOptions.RECTANGLE;
-            this._selectionChange.next(this._selection);
+            this._selectionChange$.next(this._selection);
             const rectButton = document.getElementById('rectangle-button');
             if (rectButton) {
               rectButton.click.apply(rectButton);
@@ -92,7 +92,7 @@ export class CreationService {
         this._selection = option;
       }
 
-      this._selectionChange.next(this._selection);
+      this._selectionChange$.next(this._selection);
     }
   }
 }
