@@ -49,49 +49,17 @@ export class CreationService {
     }
   }
 
-  //FIXME: Input image and text through parameters, better rewrite
+  public selectImage(imgSrc: string) {
+    this._imgSrc = imgSrc;
+  }
+
+  public setText(src: string) {
+    this._textValue = src;
+  }
+
   public changeSelection(option: SelectOptions = SelectOptions.RECTANGLE) {
     if (option !== this._selection) {
-      if (option === SelectOptions.TEXT) {
-        const input = prompt('Eneter text', this._textValue) || '';
-        if (input) {
-          this._textValue = input;
-          this._selection = option;
-        } else {
-          alert('Cant render empty string');
-        }
-      } else if (option === SelectOptions.IMAGE) {
-        const inputElement = document.getElementById('img-input');
-
-        if (!(inputElement instanceof HTMLInputElement)) {
-          throw TypeError('Must provide input element');
-        }
-        inputElement.click.apply(inputElement);
-
-        inputElement.addEventListener('change', () => {
-          if (inputElement.files && inputElement.files.length > 0) {
-            const imgSrc = inputElement.files[0];
-            if (imgSrc) {
-              this._imgSrc = URL.createObjectURL(imgSrc);
-              this._selection = option;
-              this._selectionChange$.next(this._selection);
-            } else {
-              alert('No image was selected');
-            }
-          } else {
-            alert('No image was selected');
-            this._selection = SelectOptions.RECTANGLE;
-            this._selectionChange$.next(this._selection);
-            const rectButton = document.getElementById('rectangle-button');
-            if (rectButton) {
-              rectButton.click.apply(rectButton);
-            }
-          }
-        });
-      } else {
-        this._selection = option;
-      }
-
+      this._selection = option;
       this._selectionChange$.next(this._selection);
     }
   }

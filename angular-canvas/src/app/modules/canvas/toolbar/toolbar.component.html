@@ -1,1 +1,48 @@
-<p>toolbar works!</p>
+<button
+  #defaultSelection
+  id="rectangle-button"
+  [disabled]="!isInitialized"
+  class="selected"
+  (click)="onToolSelectClick($event, options.RECTANGLE)"
+>
+  RECTANGLE
+</button>
+<button
+  id="elipse-button"
+  [disabled]="!isInitialized"
+  (click)="onToolSelectClick($event, options.ELLIPSE)"
+>
+  ELIPSE
+</button>
+<button
+  id="line-button"
+  [disabled]="!isInitialized"
+  (click)="onToolSelectClick($event, options.LINE)"
+>
+  LINE
+</button>
+<button
+  id="triangle-button"
+  [disabled]="!isInitialized"
+  (click)="onToolSelectClick($event, options.TRIANGLE)"
+>
+  TRIANGLE
+</button>
+<button
+  id="text-button"
+  [disabled]="!isInitialized"
+  (click)="onToolSelectClick($event, options.TEXT)"
+>
+  TEXT
+</button>
+<input type="file" id="img-input" accept="image/*" style="display: none" />
+<button
+  id="image-button"
+  [disabled]="!isInitialized"
+  (click)="onToolSelectClick($event, options.IMAGE)"
+>
+  IMAGE
+</button>
+<button id="clear-button" [disabled]="!isInitialized" (click)="onClearClick()">
+  CLEAR
+</button>

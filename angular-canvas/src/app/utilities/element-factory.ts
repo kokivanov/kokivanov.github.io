@@ -42,7 +42,10 @@ export class ElementFactory {
     type: T,
     params: ITextParams
   ): EB;
-  public static createElement(type: SelectOptions, params: any): EB;
+  public static createElement(
+    type: SelectOptions,
+    params: any | { x: number; y: number; h: number; w: number }
+  ): EB;
 
   public static createElement(
     type = SelectOptions.RECTANGLE,

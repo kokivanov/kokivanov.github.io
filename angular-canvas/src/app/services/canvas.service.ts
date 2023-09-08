@@ -8,7 +8,7 @@ import { ElementBase } from '../utilities/elements/absstracts';
 })
 export class CanvasService {
   private _ctx!: CanvasRenderingContext2D;
-  private _canvas!: HTMLCanvasElement;
+  private _canvas?: HTMLCanvasElement;
   private _elements: Array<ElementBase> = [];
 
   public init(canvas: HTMLCanvasElement, elements: Array<ElementBase> = []) {
@@ -20,12 +20,20 @@ export class CanvasService {
       if (!(context = canvas.getContext('2d')))
         throw TypeError('Please provide valid canvas element');
       this._ctx = context;
-      this._elements = elements || [];
+      this._elements = this._elements.concat(elements);
 
       this.render();
     } else {
       throw TypeError('Must provide valid canvas element');
     }
+  }
+
+  public uninit() {
+    this._canvas = undefined;
+  }
+
+  public get isInitialized() {
+    return !!this._canvas;
   }
 
   private drawPreviw(elem: ElementBase) {
@@ -58,25 +66,29 @@ export class CanvasService {
   }
 
   public clear() {
-    this._ctx.clearRect(
-      0,
-      0,
-      this._canvas.clientWidth,
-      this._canvas.clientHeight
-    );
-    this._elements = [];
+    if (this._canvas) {
+      this._ctx.clearRect(
+        0,
+        0,
+        this._canvas.clientWidth,
+        this._canvas.clientHeight
+      );
+      this._elements = [];
+    }
   }
 
   public render() {
-    this._ctx.clearRect(
-      0,
-      0,
-      this._canvas.clientWidth,
-      this._canvas.clientHeight
-    );
+    if (this._canvas) {
+      this._ctx.clearRect(
+        0,
+        0,
+        this._canvas.clientWidth,
+        this._canvas.clientHeight
+      );
 
-    for (const element of this._elements) {
-      element.draw(this._ctx);
+      for (const element of this._elements) {
+        element.draw(this._ctx);
+      }
     }
   }
 }
