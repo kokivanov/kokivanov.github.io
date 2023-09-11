@@ -1,1 +1,86 @@
-<p>props works!</p>
+<div>
+  <p>
+    <label for="name">name: </label>
+    <input type="text" name="name" id="text-field" [(ngModel)]="params.name" />
+  </p>
+  <p>
+    <label for="x">x: </label>
+    <input type="number" name="x" id="x-field" [(ngModel)]="params.x" />
+  </p>
+  <p>
+    <label for="y">y: </label>
+    <input type="number" name="y" id="y-field" [(ngModel)]="params.y" />
+  </p>
+  <p>
+    <label for="strokeStyle">strokeStyle: </label>
+    <input
+      type="color"
+      name="strokeStyle"
+      id="strokeStyle-field"
+      [(ngModel)]="params.strokeStyle"
+    />
+  </p>
+</div>
+
+<div *ngIf="paramsType === 'fillParams' || paramsType === 'imageParams'">
+  <p>
+    <label for="h">h: </label>
+    <input type="number" name="h" id="h-field" [(ngModel)]="params.h" />
+  </p>
+  <p>
+    <label for="w">w: </label>
+    <input type="number" name="w" id="w-field" [(ngModel)]="params.w" />
+  </p>
+  <p>
+    <label for="r">r: </label>
+    <input type="number" name="r" id="r-field" [(ngModel)]="params.r" />
+  </p>
+  <p *ngIf="paramsType === 'fillParams'">
+    <label for="fillStyle">fillStyle: </label>
+    <input
+      type="color"
+      name="fillStyle"
+      id="fillStyle-field"
+      [(ngModel)]="params.fillStyle"
+    />
+  </p>
+  <p *ngIf="paramsType === 'imageParams'">
+    <input type="file" name="imgSrc" id="imgSrc" [(ngModel)]="imgSrc" />
+  </p>
+</div>
+
+<div *ngIf="paramsType === 'lineParams'">
+  <p>
+    <label for="x2">x2: </label>
+    <input type="number" name="x2" id="x2-field" />
+  </p>
+  <p>
+    <label for="y2">y2: </label>
+    <input type="number" name="y2" id="y2-field" />
+  </p>
+</div>
+
+<div *ngIf="paramsType === 'textParams'">
+  <p>
+    <label for="r">r: </label>
+    <input type="number" name="r" id="r-field" [(ngModel)]="params.r" />
+  </p>
+  <p>
+    <label for="fontSize">fontSize: </label>
+    <input
+      type="number"
+      name="fontSize"
+      id="fontSize-field"
+      [(ngModel)]="params.fontSize"
+    />
+  </p>
+  <p>
+    <label for="value">value: </label>
+    <input
+      type="text"
+      name="value"
+      id="value-field"
+      [(ngModel)]="params.value"
+    />
+  </p>
+</div>

@@ -26,10 +26,11 @@ export interface ILineParams extends IBaseParams {
 }
 
 export interface ITextParams extends IBaseParams, IFillParams {
+  r?: number;
   value: string;
   fontSize?: number;
 }
 
-export interface IImageParams extends IBaseParams, IHWParams {
+export interface IImageParams extends IShapeParams {
   src: string;
 }
