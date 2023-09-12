@@ -8,7 +8,7 @@ import {
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { CreationService } from 'src/app/services/creation.service';
-import { SelectOptions } from 'src/app/utilities/elements';
+import { deepEqual } from 'src/app/utilities/objEqual';
 
 @Component({
   selector: 'app-canvas',
@@ -49,11 +49,8 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
         if (e instanceof MouseEvent) {
           this._endPoint = { x: e.offsetX, y: e.offsetY };
           this._canvasService.renderPreviw(
-            this._creationService.selection as SelectOptions,
-            this._startPoint.x,
-            this._startPoint.y,
-            this._endPoint.y - this._startPoint.y,
-            this._endPoint.x - this._startPoint.x
+            this._creationService.selection,
+            this._creationService.params
           );
         }
         this._creationService.params.x = this._startPoint.x;
@@ -65,9 +62,19 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       },
     });
   }
-  public onMouseUp() {
+
+  public onMouseUp(event: Event) {
+    if (event instanceof MouseEvent) {
+      this._endPoint = { x: event.offsetX, y: event.offsetY };
+    }
     this._$mouseMoveSub.unsubscribe();
-    console.log(this._startPoint, this._endPoint);
+    if (deepEqual(this._startPoint, this._endPoint)) {
+      this._creationService.params.x = this._startPoint.x;
+      this._creationService.params.y = this._startPoint.y;
+      this._creationService.addAuto();
+    } else {
+      this._creationService.addShape();
+    }
   }
 
   public onMouseMove(event: Event) {
@@ -75,4 +82,12 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       [this.mouseX, this.mouseY] = [event.offsetX, event.offsetY];
     }
   }
+
+  // public onMouseClick(event: Event) {
+  //   if (event instanceof MouseEvent && this._isClick) {
+  //     this._creationService.params.x = event.offsetX;
+  //     this._creationService.params.y = event.offsetY;
+  //     this._creationService.addAuto();
+  //   }
+  // }
 }

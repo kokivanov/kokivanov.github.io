@@ -56,12 +56,21 @@ export class ElementFactory {
       w: 100,
       x2: 100,
       y2: 100,
+      src: '',
     }
   ): EB {
     switch (type) {
       case SelectOptions.RECTANGLE:
         return new Rectangle(params);
       case SelectOptions.ELLIPSE:
+        if (params.w < 0) {
+          params.x = params.x + params.w;
+          params.w = Math.abs(params.w);
+        }
+        if (params.h < 0) {
+          params.y = params.y + params.h;
+          params.h = Math.abs(params.h);
+        }
         return new Ellipse(params);
       case SelectOptions.LINE:
         return new Line(params);

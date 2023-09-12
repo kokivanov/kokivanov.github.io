@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ElementFactory } from '../utilities/element-factory';
 import { SelectOptions } from '../utilities/elements';
 import { ElementBase } from '../utilities/elements/absstracts';
+import { IParams } from '../utilities/paramsInteface';
 
 @Injectable({
   providedIn: 'root',
@@ -41,14 +42,8 @@ export class CanvasService {
     elem.drawTry(this._ctx);
   }
 
-  public renderPreviw(
-    type: SelectOptions,
-    x: number,
-    y: number,
-    h: number,
-    w: number
-  ) {
-    const path = ElementFactory.createElement(type, { x, y, h, w });
+  public renderPreviw(type: SelectOptions, params: IParams) {
+    const path = ElementFactory.createElement(type, params);
     if (path) {
       this.drawPreviw(path);
     }
