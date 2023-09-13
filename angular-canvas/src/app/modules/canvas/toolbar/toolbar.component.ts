@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { CreationService } from 'src/app/services/creation.service';
 import { SelectOptions } from 'src/app/utilities/elements';
@@ -10,24 +10,25 @@ import { SelectOptions } from 'src/app/utilities/elements';
 })
 export class ToolbarComponent implements AfterViewInit {
   public options = SelectOptions;
-  private _currentSelection?: HTMLButtonElement;
   public isInitialized: () => boolean = () => false;
-  @ViewChild('defaultSelection')
-  public defaultSelection!: ElementRef<HTMLButtonElement>;
+  public statuses = {
+    [SelectOptions.RECTANGLE]: 'success',
+    [SelectOptions.ELLIPSE]: 'basic',
+    [SelectOptions.TRIANGLE]: 'basic',
+    [SelectOptions.LINE]: 'basic',
+    [SelectOptions.IMAGE]: 'basic',
+    [SelectOptions.TEXT]: 'basic',
+  };
 
   constructor(
     private readonly _creationService: CreationService,
     private readonly _canvasService: CanvasService
   ) {}
 
-  public onToolSelectClick(event: Event, option: SelectOptions) {
+  public onToolSelectClick(_: Event, option: SelectOptions) {
+    this.statuses[this._creationService.selection] = 'basic';
     this._creationService.changeSelection(option);
-    let target: HTMLButtonElement;
-    if (event.target instanceof HTMLButtonElement && (target = event.target)) {
-      this._currentSelection?.classList.remove('selected');
-      target.classList.add('selected');
-      this._currentSelection = target;
-    }
+    this.statuses[option] = 'success';
   }
 
   public onClearClick() {
@@ -36,6 +37,5 @@ export class ToolbarComponent implements AfterViewInit {
 
   public ngAfterViewInit(): void {
     this.isInitialized = () => this._canvasService.isInitialized;
-    this._currentSelection = this.defaultSelection.nativeElement;
   }
 }

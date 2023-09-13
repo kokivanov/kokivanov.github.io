@@ -23,8 +23,6 @@ export class PropsComponent implements OnInit {
   //   fontSize: 14,
   //   src: '',
   // };
-
-  public imgSrc!: File;
   public paramsType = 'fillParams';
   public get params() {
     return this._creationService.params;
@@ -50,5 +48,13 @@ export class PropsComponent implements OnInit {
         }
       },
     });
+  }
+
+  public onImgSrcChange(event: Event) {
+    if (event.target instanceof HTMLInputElement && event.target.files) {
+      this._creationService.params.src = URL.createObjectURL(
+        event.target.files[0]
+      );
+    }
   }
 }

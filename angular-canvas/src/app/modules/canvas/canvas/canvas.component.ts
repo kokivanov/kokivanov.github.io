@@ -82,12 +82,4 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       [this.mouseX, this.mouseY] = [event.offsetX, event.offsetY];
     }
   }
-
-  // public onMouseClick(event: Event) {
-  //   if (event instanceof MouseEvent && this._isClick) {
-  //     this._creationService.params.x = event.offsetX;
-  //     this._creationService.params.y = event.offsetY;
-  //     this._creationService.addAuto();
-  //   }
-  // }
 }

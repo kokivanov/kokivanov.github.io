@@ -23,6 +23,6 @@ export class NavbarComponent {
 
   public onLogoutClick() {
     this._authService.logout();
-    this._router.navigate(['/']);
+    this._router.navigateByUrl('/auth');
   }
 }
