@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { NbButtonModule, NbInputModule } from '@nebular/theme';
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbInputModule,
+  NbToastrModule,
+} from '@nebular/theme';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth/auth.component';
 
@@ -14,6 +19,8 @@ import { AuthComponent } from './auth/auth.component';
     ReactiveFormsModule,
     NbInputModule,
     NbButtonModule,
+    NbToastrModule,
+    NbCardModule,
   ],
 })
 export class AuthModule {}

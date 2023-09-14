@@ -79,11 +79,12 @@
 <div *ngIf="paramsType === 'textParams'">
   <p>
     <label for="r">r: </label>
-    <input type="number" name="r" id="r-field" [(ngModel)]="params.r" />
+    <input nbInput type="number" name="r" id="r-field" [(ngModel)]="params.r" />
   </p>
   <p>
     <label for="fontSize">fontSize: </label>
     <input
+      nbInput
       type="number"
       name="fontSize"
       id="fontSize-field"
@@ -93,6 +94,7 @@
   <p>
     <label for="value">value: </label>
     <input
+      nbInput
       type="text"
       name="value"
       id="value-field"

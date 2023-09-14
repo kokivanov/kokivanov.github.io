@@ -5,6 +5,7 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
+import { NbToastrService } from '@nebular/theme';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { CreationService } from 'src/app/services/creation.service';
@@ -27,7 +28,8 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private readonly _canvasService: CanvasService,
-    private readonly _creationService: CreationService
+    private readonly _creationService: CreationService,
+    private readonly _toastrService: NbToastrService
   ) {}
 
   public ngAfterViewInit(): void {
@@ -53,27 +55,37 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
             this._creationService.params
           );
         }
+
         this._creationService.params.x = this._startPoint.x;
         this._creationService.params.y = this._startPoint.y;
         this._creationService.params.x2 = this._endPoint.x;
         this._creationService.params.y2 = this._endPoint.y;
         this._creationService.params.h = this._endPoint.y - this._startPoint.y;
         this._creationService.params.w = this._endPoint.x - this._startPoint.x;
+        this._creationService.params.fontSize = Math.abs(
+          this._endPoint.y - this._startPoint.y
+        );
       },
     });
   }
 
   public onMouseUp(event: Event) {
-    if (event instanceof MouseEvent) {
-      this._endPoint = { x: event.offsetX, y: event.offsetY };
-    }
-    this._$mouseMoveSub.unsubscribe();
-    if (deepEqual(this._startPoint, this._endPoint)) {
-      this._creationService.params.x = this._startPoint.x;
-      this._creationService.params.y = this._startPoint.y;
-      this._creationService.addAuto();
-    } else {
-      this._creationService.addShape();
+    try {
+      if (event instanceof MouseEvent) {
+        this._endPoint = { x: event.offsetX, y: event.offsetY };
+      }
+      this._$mouseMoveSub.unsubscribe();
+      if (deepEqual(this._startPoint, this._endPoint)) {
+        this._creationService.params.x = this._startPoint.x;
+        this._creationService.params.y = this._startPoint.y;
+        this._creationService.addAuto();
+      } else {
+        this._creationService.addShape();
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        this._toastrService.warning(err.message, 'An error occured!');
+      }
     }
   }
 

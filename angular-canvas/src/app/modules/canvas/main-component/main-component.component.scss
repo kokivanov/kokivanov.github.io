@@ -1,0 +1,9 @@
+.canvas-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+app-canvas {
+  width: 60%;
+}

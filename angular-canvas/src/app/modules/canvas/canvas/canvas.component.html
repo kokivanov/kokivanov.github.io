@@ -1,9 +1,11 @@
-<p>X: {{ mouseX }}; Y: {{ mouseY }}</p>
-<canvas
-  #canvas
-  height="1000"
-  width="1000"
-  (mousemove)="onMouseMove($event)"
-  (mousedown)="onMouseDown($event)"
-  (mouseup)="onMouseUp($event)"
-></canvas>
+<div class="canvas-area" #canvasArea>
+  <p>X: {{ mouseX }}; Y: {{ mouseY }}</p>
+  <canvas
+    [width]="canvasArea.getBoundingClientRect().width"
+    [height]="canvas.clientWidth * 0.5"
+    #canvas
+    (mousemove)="onMouseMove($event)"
+    (mousedown)="onMouseDown($event)"
+    (mouseup)="onMouseUp($event)"
+  ></canvas>
+</div>

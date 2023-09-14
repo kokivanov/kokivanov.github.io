@@ -37,6 +37,7 @@ export class ImageElem extends ShapeBase {
 
   public override draw(ctx: CanvasRenderingContext2D) {
     this._img.src = this._imgSrc;
+    console.log('drawing img with' + this._imgSrc);
     if (this._isLoaded) {
       this.makePath();
       ctx.drawImage(this._img, this._x, this._y, this._width, this._height);

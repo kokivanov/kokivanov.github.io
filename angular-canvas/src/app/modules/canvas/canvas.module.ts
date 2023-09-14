@@ -2,7 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-import { NbButtonModule, NbInputModule } from '@nebular/theme';
+import {
+  NbButtonModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbSidebarModule,
+  NbToastrModule,
+} from '@nebular/theme';
 import { CanvasRoutingModule } from './canvas-routing.module';
 import { CanvasComponent } from './canvas/canvas.component';
 import { MainComponentComponent } from './main-component/main-component.component';
@@ -22,6 +28,9 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     FormsModule,
     NbButtonModule,
     NbInputModule,
+    NbLayoutModule,
+    NbSidebarModule,
+    NbToastrModule,
   ],
 })
 export class CanvasModule {}

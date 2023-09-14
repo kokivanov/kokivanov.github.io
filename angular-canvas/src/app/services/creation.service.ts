@@ -51,7 +51,8 @@ export class CreationService {
   }
 
   public addAuto() {
-    const elem = this.selectionToElement(this._selection, this.params);
+    const params = { ...this.params };
+    const elem = this.selectionToElement(this._selection, params);
     if (elem) {
       this._canvasService.addElement(elem);
     }

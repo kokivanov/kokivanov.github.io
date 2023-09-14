@@ -10,3 +10,9 @@
   background-color: green;
 }
 /* You can add global styles to this file, and also import other style files */
+app-navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

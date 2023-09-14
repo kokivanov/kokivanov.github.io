@@ -1,12 +1,24 @@
-<!-- <nav>
-  <a routerLink="/">Home</a>
-  <a routerLink="/canvas">Canvas</a>
-  <a routerLink="/auth" *ngIf="!isLoggedIn()">Login</a>
-</nav> -->
-
-<div *ngIf="isLoggedIn()">
-  <nb-user name="{{ username }}" style="display: inline-block"></nb-user>
-  <button nbButton (click)="onLogoutClick()" style="margin-left: 2rem">
+<div>
+  <nb-user
+    *ngIf="isLoggedIn()"
+    name="{{ username }}"
+    style="display: inline-block"
+  ></nb-user>
+  <button
+    *ngIf="isLoggedIn()"
+    nbButton
+    (click)="onLogoutClick()"
+    style="margin-left: 2rem"
+  >
     Logout
   </button>
+  <nb-user
+    *ngIf="!isLoggedIn()"
+    name="Unknown"
+    style="display: inline-block"
+  ></nb-user>
+</div>
+
+<div class="title">
+  <span>Canvas-App</span>
 </div>

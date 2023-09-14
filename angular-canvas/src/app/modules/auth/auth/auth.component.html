@@ -1,26 +1,32 @@
-<form [formGroup]="authForm" (ngSubmit)="onLoginClick()">
-  <label for="userame">Username: </label>
-  <input
-    nbInput
-    type="text"
-    formControlName="username"
-    name="username"
-    id="username"
-  />
-  <br />
-  <label for="password">Password: </label>
-  <input
-    nbInput
-    type="text"
-    formControlName="password"
-    name="password"
-    id="password"
-  />
-  <br />
-  <input
-    nbInput
-    type="submit"
-    value="Submit"
-    [disabled]="authForm.invalid && lockForm"
-  />
-</form>
+<nb-card>
+  <nb-card-body class="login-form">
+    <form [formGroup]="authForm" (ngSubmit)="onLoginClick()">
+      <label for="userame">Username: </label>
+      <input
+        nbInput
+        type="text"
+        formControlName="username"
+        name="username"
+        id="username"
+        [disabled]="lockForm"
+      />
+      <br />
+      <label for="password">Password: </label>
+      <input
+        nbInput
+        type="text"
+        formControlName="password"
+        name="password"
+        id="password"
+        [disabled]="lockForm"
+      />
+      <br />
+      <input
+        nbInput
+        type="submit"
+        value="Submit"
+        [disabled]="authForm.invalid && lockForm"
+      />
+    </form>
+  </nb-card-body>
+</nb-card>

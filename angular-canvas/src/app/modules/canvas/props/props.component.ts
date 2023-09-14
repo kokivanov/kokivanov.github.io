@@ -52,8 +52,8 @@ export class PropsComponent implements OnInit {
 
   public onImgSrcChange(event: Event) {
     if (event.target instanceof HTMLInputElement && event.target.files) {
-      this._creationService.params.src = URL.createObjectURL(
-        event.target.files[0]
+      this._creationService.selectImage(
+        URL.createObjectURL(event.target.files[0])
       );
     }
   }

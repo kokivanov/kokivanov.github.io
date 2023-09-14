@@ -1,65 +1,67 @@
-<button
-  nbButton
-  #defaultSelection
-  id="rectangle-button"
-  [disabled]="!isInitialized"
-  class="selected"
-  [status]="statuses.RECTANGLE"
-  (click)="onToolSelectClick($event, options.RECTANGLE)"
->
-  RECTANGLE
-</button>
-<button
-  nbButton
-  id="elipse-button"
-  [disabled]="!isInitialized"
-  [status]="statuses.ELLIPSE"
-  (click)="onToolSelectClick($event, options.ELLIPSE)"
->
-  ELIPSE
-</button>
-<button
-  nbButton
-  id="line-button"
-  [disabled]="!isInitialized"
-  [status]="statuses.LINE"
-  (click)="onToolSelectClick($event, options.LINE)"
->
-  LINE
-</button>
-<button
-  nbButton
-  id="triangle-button"
-  [disabled]="!isInitialized"
-  [status]="statuses.TRIANGLE"
-  (click)="onToolSelectClick($event, options.TRIANGLE)"
->
-  TRIANGLE
-</button>
-<button
-  nbButton
-  id="text-button"
-  [disabled]="!isInitialized"
-  [status]="statuses.TEXT"
-  (click)="onToolSelectClick($event, options.TEXT)"
->
-  TEXT
-</button>
-<input type="file" id="img-input" accept="image/*" style="display: none" />
-<button
-  nbButton
-  id="image-button"
-  [disabled]="!isInitialized"
-  [status]="statuses.IMAGE"
-  (click)="onToolSelectClick($event, options.IMAGE)"
->
-  IMAGE
-</button>
-<button
-  nbButton
-  id="clear-button"
-  [disabled]="!isInitialized"
-  (click)="onClearClick()"
->
-  CLEAR
-</button>
+<div class="toolbar">
+  <button
+    nbButton
+    #defaultSelection
+    id="rectangle-button"
+    [disabled]="!isInitialized"
+    class="selected"
+    [status]="statuses.RECTANGLE"
+    (click)="onToolSelectClick($event, options.RECTANGLE)"
+  >
+    RECTANGLE
+  </button>
+  <button
+    nbButton
+    id="elipse-button"
+    [disabled]="!isInitialized"
+    [status]="statuses.ELLIPSE"
+    (click)="onToolSelectClick($event, options.ELLIPSE)"
+  >
+    ELIPSE
+  </button>
+  <button
+    nbButton
+    id="line-button"
+    [disabled]="!isInitialized"
+    [status]="statuses.LINE"
+    (click)="onToolSelectClick($event, options.LINE)"
+  >
+    LINE
+  </button>
+  <button
+    nbButton
+    id="triangle-button"
+    [disabled]="!isInitialized"
+    [status]="statuses.TRIANGLE"
+    (click)="onToolSelectClick($event, options.TRIANGLE)"
+  >
+    TRIANGLE
+  </button>
+  <button
+    nbButton
+    id="text-button"
+    [disabled]="!isInitialized"
+    [status]="statuses.TEXT"
+    (click)="onToolSelectClick($event, options.TEXT)"
+  >
+    TEXT
+  </button>
+  <input type="file" id="img-input" accept="image/*" style="display: none" />
+  <button
+    nbButton
+    id="image-button"
+    [disabled]="!isInitialized"
+    [status]="statuses.IMAGE"
+    (click)="onToolSelectClick($event, options.IMAGE)"
+  >
+    IMAGE
+  </button>
+  <button
+    nbButton
+    id="clear-button"
+    [disabled]="!isInitialized"
+    (click)="onClearClick()"
+  >
+    CLEAR
+  </button>
+</div>

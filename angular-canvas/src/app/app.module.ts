@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbButtonModule,
   NbLayoutModule,
   NbThemeModule,
+  NbToastrModule,
   NbUserModule,
 } from '@nebular/theme';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +18,7 @@ import { MainPageModule } from './modules/main-page/main-page.module';
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MainPageModule,
     HttpClientModule,
@@ -26,6 +27,7 @@ import { MainPageModule } from './modules/main-page/main-page.module';
     NbLayoutModule,
     NbButtonModule,
     NbUserModule,
+    NbToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -79,7 +79,11 @@ export class ElementFactory {
       case SelectOptions.TEXT:
         return new TextElem(params);
       case SelectOptions.IMAGE:
-        return new ImageElem(params);
+        if (params.src === '') {
+          throw new Error('No image selected');
+        } else {
+          return new ImageElem(params);
+        }
       default:
         return new Rectangle(params);
     }
