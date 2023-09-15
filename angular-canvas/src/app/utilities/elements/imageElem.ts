@@ -1,3 +1,4 @@
+import { Subject, fromEvent } from 'rxjs';
 import { ShapeBase } from './absstracts';
 import { IImageParams } from './interfaces';
 
@@ -5,6 +6,11 @@ export class ImageElem extends ShapeBase {
   private _img = new Image();
   private _imgSrc: string;
   private _isLoaded = false;
+  private readonly _whenLoaded$ = new Subject<boolean>();
+
+  public get whenLoaded() {
+    return this._whenLoaded$.asObservable();
+  }
 
   public get img() {
     return this._img;
@@ -37,15 +43,18 @@ export class ImageElem extends ShapeBase {
 
   public override draw(ctx: CanvasRenderingContext2D) {
     this._img.src = this._imgSrc;
-    console.log('drawing img with' + this._imgSrc);
     if (this._isLoaded) {
       this.makePath();
       ctx.drawImage(this._img, this._x, this._y, this._width, this._height);
     } else {
-      this._img.addEventListener('load', () => {
-        this.makePath();
-        ctx.drawImage(this._img, this._x, this._y, this._width, this._height);
-        this._isLoaded = true;
+      const subs$ = fromEvent(this._img, 'load').subscribe({
+        next: () => {
+          this.makePath();
+          ctx.drawImage(this._img, this._x, this._y, this._width, this._height);
+          this._isLoaded = true;
+          this._whenLoaded$.next(true);
+          subs$.unsubscribe();
+        },
       });
     }
   }

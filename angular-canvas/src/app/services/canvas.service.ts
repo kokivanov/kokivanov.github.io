@@ -12,6 +12,20 @@ export class CanvasService {
   private _canvas?: HTMLCanvasElement;
   private _elements: Array<ElementBase> = [];
 
+  private _lockCanvas = false;
+
+  public disableClick() {
+    this._lockCanvas = true;
+  }
+
+  public enableClick() {
+    this._lockCanvas = false;
+  }
+
+  public get lockCanvas() {
+    return this._lockCanvas;
+  }
+
   public init(canvas: HTMLCanvasElement, elements: Array<ElementBase> = []) {
     if (canvas instanceof HTMLCanvasElement) {
       this._canvas = canvas;

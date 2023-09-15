@@ -39,7 +39,6 @@ export class AuthService {
       .post<IUser>(this._baseUrl + 'auth/login', { username, password })
       .pipe(
         tap((v) => {
-          console.log(v);
           this._user = v;
           localStorage.setItem('UserData', JSON.stringify(v));
         })

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription, delay, of } from 'rxjs';
+import { CanvasService } from 'src/app/services/canvas.service';
 import { CreationService } from 'src/app/services/creation.service';
 import { SelectOptions } from 'src/app/utilities/elements';
 
@@ -28,7 +30,10 @@ export class PropsComponent implements OnInit {
     return this._creationService.params;
   }
 
-  constructor(private readonly _creationService: CreationService) {}
+  constructor(
+    private readonly _creationService: CreationService,
+    private readonly _canvasService: CanvasService
+  ) {}
 
   public ngOnInit(): void {
     this._creationService.selectionChange.subscribe({
@@ -50,10 +55,27 @@ export class PropsComponent implements OnInit {
     });
   }
 
+  public onImgSrcClick() {
+    this._canvasService.disableClick();
+  }
+
   public onImgSrcChange(event: Event) {
-    if (event.target instanceof HTMLInputElement && event.target.files) {
+    if (
+      event.target instanceof HTMLInputElement &&
+      event.target.files &&
+      event.target.files.length > 0
+    ) {
       this._creationService.selectImage(
         URL.createObjectURL(event.target.files[0])
+      );
+      const sub$ = new Subscription();
+      sub$.add(
+        of(null)
+          .pipe(delay(300))
+          .subscribe(() => {
+            this._canvasService.enableClick();
+            sub$.unsubscribe();
+          })
       );
     }
   }

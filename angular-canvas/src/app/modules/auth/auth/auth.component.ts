@@ -31,7 +31,6 @@ export class AuthComponent {
   }
 
   public onLoginClick() {
-    console.log(this.authForm.value);
     if (this.authForm.value.username && this.authForm.value.password) {
       this.toggleForm();
       this._authService

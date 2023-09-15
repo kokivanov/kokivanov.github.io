@@ -54,7 +54,7 @@
       [(ngModel)]="params.fillStyle"
     />
   </p>
-  <p *ngIf="paramsType === 'imageParams'">
+  <p (click)="onImgSrcClick()" *ngIf="paramsType === 'imageParams'">
     <input
       nbInput
       type="file"

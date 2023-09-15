@@ -70,6 +70,10 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   }
 
   public onMouseUp(event: Event) {
+    if (this._canvasService.lockCanvas) {
+      this._canvasService.enableClick();
+      return;
+    }
     try {
       if (event instanceof MouseEvent) {
         this._endPoint = { x: event.offsetX, y: event.offsetY };
