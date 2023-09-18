@@ -24,7 +24,7 @@ export abstract class FillShabeBase extends ShapeBase {
     ctx.fillStyle = this._fillStyle;
     ctx.strokeStyle = this._strokeStyle;
     ctx.fill(this._path);
-    ctx.stroke(this._path);
+    super.draw(ctx);
     ctx.restore();
   }
 

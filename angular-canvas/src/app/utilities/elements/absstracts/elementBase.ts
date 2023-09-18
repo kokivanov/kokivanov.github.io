@@ -1,3 +1,4 @@
+import { IParams } from '../../paramsInteface';
 import { IBaseParams } from '../interfaces';
 import { stylingParams } from '../types';
 
@@ -6,6 +7,13 @@ export abstract class ElementBase {
   protected _strokeStyle: stylingParams;
   protected _x: number;
   protected _y: number;
+  protected _selected: boolean;
+
+  public abstract get params(): IParams;
+
+  public get isSelected() {
+    return this._selected;
+  }
 
   public get name() {
     return this._name;
@@ -34,8 +42,18 @@ export abstract class ElementBase {
     this._strokeStyle = params.strokeStyle || 'black';
     this._x = params.x || 0;
     this._y = params.y || 0;
+    this._selected = false;
+  }
+
+  public select() {
+    this._selected = true;
+  }
+
+  public deselect() {
+    this._selected = false;
   }
 
   public abstract draw(ctx: CanvasRenderingContext2D): void;
   public abstract drawTry(ctx: CanvasRenderingContext2D): void;
+  public abstract drawHover(ctx: CanvasRenderingContext2D): void;
 }

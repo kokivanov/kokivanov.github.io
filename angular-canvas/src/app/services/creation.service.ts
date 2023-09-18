@@ -9,7 +9,7 @@ import { CanvasService } from './canvas.service';
   providedIn: 'root',
 })
 export class CreationService {
-  private _selection: SelectOptions = SelectOptions.RECTANGLE;
+  private _selection: SelectOptions = SelectOptions.HAND;
 
   public params: IParams = {
     x: 100,
@@ -38,20 +38,15 @@ export class CreationService {
 
   constructor(private readonly _canvasService: CanvasService) {}
 
-  private selectionToElement<
-    T extends
-      | SelectOptions.RECTANGLE
-      | SelectOptions.ELLIPSE
-      | SelectOptions.IMAGE
-      | SelectOptions.TEXT
-      | SelectOptions.TRIANGLE
-      | SelectOptions.LINE
-  >(type: T, params: any) {
+  private selectionToElement<T extends SelectOptions>(type: T, params: any) {
     return ElementFactory.createElement(type, params);
   }
 
   public addAuto() {
     const params = { ...this.params };
+    if (this._canvasService.lastElement?.name === this.params.name) {
+      this.params.name = 'Shape - ' + Math.trunc(Math.random() * 1000000);
+    }
     const elem = this.selectionToElement(this._selection, params);
     if (elem) {
       this._canvasService.addElement(elem);
@@ -78,6 +73,9 @@ export class CreationService {
   }
 
   public addShape() {
+    if (this._canvasService.lastElement?.name === this.params.name) {
+      this.params.name = 'Shape - ' + Math.trunc(Math.random() * 1000000);
+    }
     this._canvasService.addElement(
       this.selectionToElement(this._selection, this.params)
     );

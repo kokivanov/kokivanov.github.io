@@ -49,8 +49,8 @@ export abstract class ShapeBase extends PathElement {
   public override draw(ctx: CanvasRenderingContext2D) {
     ctx.save();
     ctx.strokeStyle = this._strokeStyle;
-    ctx.fill(this._path);
     ctx.stroke(this._path);
+    super.draw(ctx);
     ctx.restore();
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription, delay, of } from 'rxjs';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { CreationService } from 'src/app/services/creation.service';
+import { EditingService } from 'src/app/services/editing.service';
 import { SelectOptions } from 'src/app/utilities/elements';
 
 @Component({
@@ -27,12 +28,17 @@ export class PropsComponent implements OnInit {
   // };
   public paramsType = 'fillParams';
   public get params() {
-    return this._creationService.params;
+    if (this._creationService.selection === SelectOptions.HAND) {
+      return this._editionService.params;
+    } else {
+      return this._creationService.params;
+    }
   }
 
   constructor(
     private readonly _creationService: CreationService,
-    private readonly _canvasService: CanvasService
+    private readonly _canvasService: CanvasService,
+    private readonly _editionService: EditingService
   ) {}
 
   public ngOnInit(): void {

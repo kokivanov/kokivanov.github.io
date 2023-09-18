@@ -12,12 +12,13 @@ export class ToolbarComponent implements AfterViewInit {
   public options = SelectOptions;
   public isInitialized: () => boolean = () => false;
   public statuses = {
-    [SelectOptions.RECTANGLE]: 'success',
+    [SelectOptions.RECTANGLE]: 'basic',
     [SelectOptions.ELLIPSE]: 'basic',
     [SelectOptions.TRIANGLE]: 'basic',
     [SelectOptions.LINE]: 'basic',
     [SelectOptions.IMAGE]: 'basic',
     [SelectOptions.TEXT]: 'basic',
+    [SelectOptions.HAND]: 'success',
   };
 
   constructor(

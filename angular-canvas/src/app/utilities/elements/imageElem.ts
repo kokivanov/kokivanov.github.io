@@ -1,4 +1,5 @@
 import { Subject, fromEvent } from 'rxjs';
+import { IParams } from '../paramsInteface';
 import { ShapeBase } from './absstracts';
 import { IImageParams } from './interfaces';
 
@@ -7,6 +8,24 @@ export class ImageElem extends ShapeBase {
   private _imgSrc: string;
   private _isLoaded = false;
   private readonly _whenLoaded$ = new Subject<boolean>();
+
+  public override get params(): IParams {
+    return {
+      name: this._name,
+      x: this._x,
+      y: this._y,
+      value: '',
+      src: this._imgSrc,
+      strokeStyle: this._strokeStyle,
+      w: this._width,
+      h: this._height,
+      x2: null,
+      y2: null,
+      fontSize: null,
+      fillStyle: null,
+      r: this._rotation,
+    };
+  }
 
   public get whenLoaded() {
     return this._whenLoaded$.asObservable();

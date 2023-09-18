@@ -1,9 +1,28 @@
+import { IParams } from '../paramsInteface';
 import { PathElement } from './absstracts';
 import { ILineParams } from './interfaces';
 
 export class Line extends PathElement {
   private _x2: number;
   private _y2: number;
+
+  public override get params(): IParams {
+    return {
+      name: this._name,
+      x: this._x,
+      y: this._y,
+      value: '',
+      src: '',
+      strokeStyle: this._strokeStyle,
+      fillStyle: '',
+      w: this._x2 - this._x,
+      h: this._y2 - this._y,
+      r: null,
+      x2: this._x2,
+      y2: this._y2,
+      fontSize: null,
+    };
+  }
 
   public override get coords() {
     return { x: this._x, y: this._y };

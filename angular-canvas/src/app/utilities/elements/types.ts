@@ -23,6 +23,7 @@ export enum SelectOptions {
   TRIANGLE = 'TRIANGLE',
   TEXT = 'TEXT',
   IMAGE = 'IMAGE',
+  HAND = 'HAND',
 }
 
 export type Line_t = 'Line';

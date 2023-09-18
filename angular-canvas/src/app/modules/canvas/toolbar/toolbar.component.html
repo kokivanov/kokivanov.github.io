@@ -5,6 +5,17 @@
     id="rectangle-button"
     [disabled]="!isInitialized"
     class="selected"
+    [status]="statuses.HAND"
+    (click)="onToolSelectClick($event, options.HAND)"
+  >
+    HAND
+  </button>
+  <button
+    nbButton
+    #defaultSelection
+    id="rectangle-button"
+    [disabled]="!isInitialized"
+    class="selected"
     [status]="statuses.RECTANGLE"
     (click)="onToolSelectClick($event, options.RECTANGLE)"
   >

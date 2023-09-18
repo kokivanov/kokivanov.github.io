@@ -1,15 +1,17 @@
+import { stylingParams } from './elements';
+
 export interface IParams {
-  x: number;
-  y: number;
-  strokeStyle: string;
+  x: number | null;
+  y: number | null;
+  strokeStyle: stylingParams;
   name: string;
-  h: number;
-  w: number;
-  fillStyle: string;
-  r: number;
-  x2: number;
-  y2: number;
+  h: number | null;
+  w: number | null;
+  fillStyle: stylingParams | null;
+  r: number | null;
+  x2: number | null;
+  y2: number | null;
   value: string;
-  fontSize: number;
+  fontSize: number | null;
   src: string;
 }

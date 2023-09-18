@@ -68,11 +68,23 @@
 <div *ngIf="paramsType === 'lineParams'">
   <p>
     <label for="x2">x2: </label>
-    <input type="number" name="x2" id="x2-field" [(ngModel)]="params.x2" />
+    <input
+      nbInput
+      type="number"
+      name="x2"
+      id="x2-field"
+      [(ngModel)]="params.x2"
+    />
   </p>
   <p>
     <label for="y2">y2: </label>
-    <input type="number" name="y2" id="y2-field" [(ngModel)]="params.y2" />
+    <input
+      nbInput
+      type="number"
+      name="y2"
+      id="y2-field"
+      [(ngModel)]="params.y2"
+    />
   </p>
 </div>
 

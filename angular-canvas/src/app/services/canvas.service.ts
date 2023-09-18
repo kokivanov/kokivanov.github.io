@@ -26,6 +26,18 @@ export class CanvasService {
     return this._lockCanvas;
   }
 
+  public get elements() {
+    return this._elements;
+  }
+
+  public get lastElement() {
+    return this._elements.at(this._elements.length - 1);
+  }
+
+  public get context() {
+    return this._ctx;
+  }
+
   public init(canvas: HTMLCanvasElement, elements: Array<ElementBase> = []) {
     if (canvas instanceof HTMLCanvasElement) {
       this._canvas = canvas;
