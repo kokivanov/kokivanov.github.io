@@ -79,4 +79,9 @@ export class TextElem extends ElementBase {
     ctx.strokeText(this._value, this._x, this._y);
     ctx.restore();
   }
+
+  public override setParams(params: IParams): void {
+    this._value = params.value;
+    this._fontSize = params.fontSize ?? 14;
+  }
 }

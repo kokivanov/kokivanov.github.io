@@ -41,6 +41,34 @@ export class PropsComponent implements OnInit {
     private readonly _editionService: EditingService
   ) {}
 
+  public onFieldChange(event: Event) {
+    let prop = event.target;
+    if (prop instanceof HTMLInputElement) {
+      const params = this._editionService.params;
+      switch (prop.name) {
+        case 'name':
+        case 'strokeStyle':
+        case 'fillStyle':
+        case 'value':
+          params[prop.name] = prop.value.toString();
+          break;
+        case 'x':
+        case 'y':
+        case 'h':
+        case 'w':
+        case 'x2':
+        case 'y2':
+        case 'r':
+        case 'fontSize':
+          params[prop.name] = parseInt(prop.value);
+          break;
+      }
+
+      this._editionService.useParams(params);
+      this._canvasService.render();
+    }
+  }
+
   public ngOnInit(): void {
     this._creationService.selectionChange.subscribe(() => {
       if (
@@ -61,6 +89,11 @@ export class PropsComponent implements OnInit {
 
   public onImgSrcClick() {
     this._canvasService.disableClick();
+  }
+
+  public onRemoveClick() {
+    this._editionService.removeSelectedShapes();
+    this._canvasService.render();
   }
 
   public onImgSrcChange(event: Event) {

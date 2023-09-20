@@ -1,3 +1,4 @@
+import { IParams } from '../../paramsInteface';
 import { IShapeParams } from '../interfaces';
 import { PathElement } from './pathElement';
 
@@ -59,5 +60,12 @@ export abstract class ShapeBase extends PathElement {
     ctx.strokeStyle = 'blue';
     ctx.stroke(this._path);
     ctx.restore();
+  }
+
+  public override setParams(params: IParams): void {
+    this._height = params.h ?? 100;
+    this._width = params.w ?? 100;
+    this._rotation = params.r ?? 0;
+    super.setParams(params);
   }
 }

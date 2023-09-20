@@ -13,6 +13,8 @@ export class EditingService {
   private _selectedShapes = Array<ElementBase>();
   private _multiselect = false;
 
+  // public isShapeSElected
+
   public get params(): IParams {
     const lastSelected = this._selectedShapes.at(
       this._selectedShapes.length - 1
@@ -21,18 +23,18 @@ export class EditingService {
       return lastSelected.params;
     } else {
       return {
-        x: null,
-        y: null,
-        x2: null,
-        y2: null,
-        strokeStyle: '',
-        fillStyle: null,
+        x: 100,
+        y: 100,
+        x2: 200,
+        y2: 200,
+        strokeStyle: 'black',
+        fillStyle: 'red',
         name: '',
-        h: 0,
-        w: 0,
+        h: 100,
+        w: 100,
         r: 0,
-        value: '',
-        fontSize: null,
+        value: 'Hello world!',
+        fontSize: 14,
         src: '',
       };
     }
@@ -46,6 +48,14 @@ export class EditingService {
 
   public disableMultiselect() {
     this._multiselect = false;
+  }
+
+  public removeSelectedShapes() {
+    for (let elem of this._selectedShapes) {
+      this._canvasService.removeElem(elem.name);
+    }
+
+    this._selectedShapes = [];
   }
 
   private static doesCross(elem: ElementBase, x: number, y: number) {
@@ -81,6 +91,13 @@ export class EditingService {
     }
 
     return x1 > x && x2 < x && y1 > y && y2 < y;
+  }
+
+  public useParams(params: IParams) {
+    console.log(this._selectedShapes);
+    for (let elem of this._selectedShapes) {
+      elem.setParams(params);
+    }
   }
 
   public selectShape() {

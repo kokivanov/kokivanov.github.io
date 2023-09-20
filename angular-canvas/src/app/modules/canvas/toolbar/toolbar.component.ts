@@ -30,6 +30,14 @@ export class ToolbarComponent implements AfterViewInit {
     this.statuses[this._creationService.selection] = 'basic';
     this._creationService.changeSelection(option);
     this.statuses[option] = 'success';
+
+    if (this._canvasService.canvas) {
+      if (this._creationService.selection === EnumSelectOptions.HAND) {
+        this._canvasService.canvas.style.cursor = 'grab';
+      } else {
+        this._canvasService.canvas.style.cursor = 'crosshair';
+      }
+    }
   }
 
   public onClearClick() {

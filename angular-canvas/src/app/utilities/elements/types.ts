@@ -7,6 +7,21 @@ import {
   Triangle,
 } from '../elements';
 
+export type TypeParams =
+  | 'x'
+  | 'y'
+  | 'x2'
+  | 'y2'
+  | 'strokeStyle'
+  | 'name'
+  | 'h'
+  | 'w'
+  | 'fillStyle'
+  | 'r'
+  | 'value'
+  | 'fontSize'
+  | 'src';
+
 export type TypeStylingParams = string | CanvasGradient | CanvasPattern;
 export type TypeShape =
   | ImageElem

@@ -45,6 +45,14 @@ export abstract class ElementBase {
     this._selected = false;
   }
 
+  public setParams(params: IParams) {
+    this._name = params.name;
+    this._x = params.x ?? 100;
+    this._y = params.y ?? 100;
+    this._strokeStyle = params.strokeStyle;
+    console.log(this);
+  }
+
   public select() {
     this._selected = true;
   }

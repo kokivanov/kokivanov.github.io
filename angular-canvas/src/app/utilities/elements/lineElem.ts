@@ -63,6 +63,7 @@ export class Line extends PathElement {
   }
 
   public makePath(): void {
+    this._path = new Path2D();
     this._path.moveTo(this._x, this._y);
     this._path.lineTo(this._x2, this._y2);
   }
@@ -81,5 +82,11 @@ export class Line extends PathElement {
     ctx.strokeStyle = 'blue';
     ctx.stroke(this._path);
     ctx.restore();
+  }
+
+  public override setParams(params: IParams): void {
+    this._x2 = params.x2 ?? 200;
+    this._y2 = params.y2 ?? 200;
+    super.setParams(params);
   }
 }

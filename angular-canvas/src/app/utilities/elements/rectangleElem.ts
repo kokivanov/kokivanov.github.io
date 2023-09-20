@@ -26,6 +26,8 @@ export class Rectangle extends FillShabeBase {
   }
 
   public makePath(): void {
+    this._path = new Path2D();
+    this._path = new Path2D();
     this._path.rect(this._x, this._y, this._width, this._height);
   }
 

@@ -1,3 +1,4 @@
+import { IParams } from '../../paramsInteface';
 import { IFillShapeParams } from '../interfaces';
 import { TypeStylingParams } from '../types';
 import { ShapeBase } from './shapeBase';
@@ -35,5 +36,10 @@ export abstract class FillShabeBase extends ShapeBase {
     ctx.strokeStyle = 'blue';
     ctx.stroke(this._path);
     ctx.restore();
+  }
+
+  public override setParams(params: IParams): void {
+    this._fillStyle = params.fillStyle ?? '';
+    super.setParams(params);
   }
 }

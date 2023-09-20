@@ -7,15 +7,30 @@
       name="name"
       id="text-field"
       [(ngModel)]="params.name"
+      (change)="onFieldChange($event)"
     />
   </p>
   <p>
     <label for="x">x: </label>
-    <input nbInput type="number" name="x" id="x-field" [(ngModel)]="params.x" />
+    <input
+      nbInput
+      type="number"
+      name="x"
+      id="x-field"
+      [(ngModel)]="params.x"
+      (change)="onFieldChange($event)"
+    />
   </p>
   <p>
     <label for="y">y: </label>
-    <input nbInput type="number" name="y" id="y-field" [(ngModel)]="params.y" />
+    <input
+      nbInput
+      type="number"
+      name="y"
+      id="y-field"
+      [(ngModel)]="params.y"
+      (change)="onFieldChange($event)"
+    />
   </p>
   <p>
     <label for="strokeStyle">strokeStyle: </label>
@@ -26,6 +41,7 @@
       name="strokeStyle"
       id="strokeStyle-field"
       [(ngModel)]="params.strokeStyle"
+      (change)="onFieldChange($event)"
     />
   </p>
 </div>
@@ -33,15 +49,36 @@
 <div *ngIf="paramsType === 'fillParams' || paramsType === 'imageParams'">
   <p>
     <label for="h">h: </label>
-    <input nbInput type="number" name="h" id="h-field" [(ngModel)]="params.h" />
+    <input
+      nbInput
+      type="number"
+      name="h"
+      id="h-field"
+      [(ngModel)]="params.h"
+      (change)="onFieldChange($event)"
+    />
   </p>
   <p>
     <label for="w">w: </label>
-    <input nbInput type="number" name="w" id="w-field" [(ngModel)]="params.w" />
+    <input
+      nbInput
+      type="number"
+      name="w"
+      id="w-field"
+      [(ngModel)]="params.w"
+      (change)="onFieldChange($event)"
+    />
   </p>
   <p>
     <label for="r">r: </label>
-    <input nbInput type="number" name="r" id="r-field" [(ngModel)]="params.r" />
+    <input
+      nbInput
+      type="number"
+      name="r"
+      id="r-field"
+      [(ngModel)]="params.r"
+      (change)="onFieldChange($event)"
+    />
   </p>
   <p *ngIf="paramsType === 'fillParams'">
     <label for="fillStyle">fillStyle: </label>
@@ -52,6 +89,7 @@
       name="fillStyle"
       id="fillStyle-field"
       [(ngModel)]="params.fillStyle"
+      (change)="onFieldChange($event)"
     />
   </p>
   <p (click)="onImgSrcClick()" *ngIf="paramsType === 'imageParams'">
@@ -61,6 +99,7 @@
       name="imgSrc"
       id="imgSrc"
       (change)="onImgSrcChange($event)"
+      (change)="onFieldChange($event)"
     />
   </p>
 </div>
@@ -74,6 +113,7 @@
       name="x2"
       id="x2-field"
       [(ngModel)]="params.x2"
+      (change)="onFieldChange($event)"
     />
   </p>
   <p>
@@ -84,6 +124,7 @@
       name="y2"
       id="y2-field"
       [(ngModel)]="params.y2"
+      (change)="onFieldChange($event)"
     />
   </p>
 </div>
@@ -91,7 +132,14 @@
 <div *ngIf="paramsType === 'textParams'">
   <p>
     <label for="r">r: </label>
-    <input nbInput type="number" name="r" id="r-field" [(ngModel)]="params.r" />
+    <input
+      nbInput
+      type="number"
+      name="r"
+      id="r-field"
+      [(ngModel)]="params.r"
+      (change)="onFieldChange($event)"
+    />
   </p>
   <p>
     <label for="fontSize">fontSize: </label>
@@ -101,6 +149,7 @@
       name="fontSize"
       id="fontSize-field"
       [(ngModel)]="params.fontSize"
+      (change)="onFieldChange($event)"
     />
   </p>
   <p>
@@ -111,6 +160,8 @@
       name="value"
       id="value-field"
       [(ngModel)]="params.value"
+      (change)="onFieldChange($event)"
     />
   </p>
 </div>
+<button nbButton status="danger" (click)="onRemoveClick()">Remove</button>

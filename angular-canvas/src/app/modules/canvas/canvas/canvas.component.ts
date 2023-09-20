@@ -109,9 +109,11 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   }
 
   public onMouseMove(event: Event) {
-    if (event instanceof MouseEvent) {
-      [this.mouseX, this.mouseY] = [event.offsetX, event.offsetY];
+    if (this._creationService.selection === EnumSelectOptions.HAND) {
+      if (event instanceof MouseEvent) {
+        [this.mouseX, this.mouseY] = [event.offsetX, event.offsetY];
+      }
+      this._editindService.hoverShape(this.mouseX, this.mouseY);
     }
-    this._editindService.hoverShape(this.mouseX, this.mouseY);
   }
 }

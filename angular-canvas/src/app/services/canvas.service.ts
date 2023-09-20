@@ -14,6 +14,10 @@ export class CanvasService {
 
   private _lockCanvas = false;
 
+  public get canvas() {
+    return this._canvas;
+  }
+
   public disableClick() {
     this._lockCanvas = true;
   }
@@ -100,6 +104,8 @@ export class CanvasService {
 
   public render() {
     if (this._canvas) {
+      console.log(this.elements);
+
       this._ctx.clearRect(
         0,
         0,

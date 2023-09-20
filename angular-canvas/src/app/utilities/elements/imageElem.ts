@@ -78,4 +78,9 @@ export class ImageElem extends ShapeBase {
     this._strokeStyle = '';
     super.draw(ctx);
   }
+
+  public override setParams(params: IParams): void {
+    this._imgSrc = params.src;
+    super.setParams(params);
+  }
 }
