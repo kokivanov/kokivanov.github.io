@@ -30,8 +30,6 @@ export class Ellipse extends FillShabeBase {
 
     this._width = Math.ceil(this._width / 2);
     this._height = Math.ceil(this._height / 2);
-
-    console.log(this);
   }
 
   public makePath(): void {

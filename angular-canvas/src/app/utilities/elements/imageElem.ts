@@ -66,15 +66,16 @@ export class ImageElem extends ShapeBase {
       this.makePath();
       ctx.drawImage(this._img, this._x, this._y, this._width, this._height);
     } else {
-      const subs$ = fromEvent(this._img, 'load').subscribe({
-        next: () => {
-          this.makePath();
-          ctx.drawImage(this._img, this._x, this._y, this._width, this._height);
-          this._isLoaded = true;
-          this._whenLoaded$.next(true);
-          subs$.unsubscribe();
-        },
+      const subs$ = fromEvent(this._img, 'load').subscribe(() => {
+        this.makePath();
+        ctx.drawImage(this._img, this._x, this._y, this._width, this._height);
+        this._isLoaded = true;
+        this._whenLoaded$.next(true);
+
+        subs$.unsubscribe();
       });
     }
+    this._strokeStyle = '';
+    super.draw(ctx);
   }
 }

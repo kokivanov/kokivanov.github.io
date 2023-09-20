@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { CreationService } from 'src/app/services/creation.service';
-import { SelectOptions } from 'src/app/utilities/elements';
+import { EnumSelectOptions } from 'src/app/utilities/elements';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,16 +9,16 @@ import { SelectOptions } from 'src/app/utilities/elements';
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent implements AfterViewInit {
-  public options = SelectOptions;
+  public options = EnumSelectOptions;
   public isInitialized: () => boolean = () => false;
   public statuses = {
-    [SelectOptions.RECTANGLE]: 'basic',
-    [SelectOptions.ELLIPSE]: 'basic',
-    [SelectOptions.TRIANGLE]: 'basic',
-    [SelectOptions.LINE]: 'basic',
-    [SelectOptions.IMAGE]: 'basic',
-    [SelectOptions.TEXT]: 'basic',
-    [SelectOptions.HAND]: 'success',
+    [EnumSelectOptions.RECTANGLE]: 'basic',
+    [EnumSelectOptions.ELLIPSE]: 'basic',
+    [EnumSelectOptions.TRIANGLE]: 'basic',
+    [EnumSelectOptions.LINE]: 'basic',
+    [EnumSelectOptions.IMAGE]: 'basic',
+    [EnumSelectOptions.TEXT]: 'basic',
+    [EnumSelectOptions.HAND]: 'success',
   };
 
   constructor(
@@ -26,7 +26,7 @@ export class ToolbarComponent implements AfterViewInit {
     private readonly _canvasService: CanvasService
   ) {}
 
-  public onToolSelectClick(_: Event, option: SelectOptions) {
+  public onToolSelectClick(_: Event, option: EnumSelectOptions) {
     this.statuses[this._creationService.selection] = 'basic';
     this._creationService.changeSelection(option);
     this.statuses[option] = 'success';

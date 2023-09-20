@@ -62,7 +62,11 @@ export class EditingService {
       x2 = elem.coords.x + elem.width;
       y2 = elem.coords.y + elem.height;
     } else if (elem instanceof TextElem) {
-      [x2, y2] = [-1, -1];
+      [x2, y2] = [
+        elem.coords.x + elem.value.length * Math.ceil((elem.fontSize / 7) * 3),
+        elem.coords.y,
+      ];
+      y1 = elem.coords.y - elem.fontSize;
     } else {
       const elem2 = elem as FillShabeBase;
       x2 = x1 + elem2.width;
@@ -80,7 +84,6 @@ export class EditingService {
   }
 
   public selectShape() {
-    console.log('Selecting ', this._lastHover);
     if (this._lastHover) {
       if (!this._multiselect) {
         for (let elem of this._selectedShapes) {
@@ -97,7 +100,6 @@ export class EditingService {
         this._lastHover.select();
       }
       this._selectedShapes.push(this._lastHover);
-      console.log(this._selectedShapes);
       this._canvasService.render();
     } else if (!this._multiselect) {
       for (let elem of this._selectedShapes) {
@@ -118,8 +120,6 @@ export class EditingService {
     }
 
     for (let elem of [...this._canvasService.elements].reverse()) {
-      console.log('Crosses ', elem.name);
-
       if (EditingService.doesCross(elem, x, y)) {
         this._canvasService.render();
         elem.drawHover(this._canvasService.context);

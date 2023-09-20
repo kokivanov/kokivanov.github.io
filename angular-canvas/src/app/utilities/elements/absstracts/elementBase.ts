@@ -1,10 +1,10 @@
 import { IParams } from '../../paramsInteface';
 import { IBaseParams } from '../interfaces';
-import { stylingParams } from '../types';
+import { TypeStylingParams } from '../types';
 
 export abstract class ElementBase {
   protected _name: string;
-  protected _strokeStyle: stylingParams;
+  protected _strokeStyle: TypeStylingParams;
   protected _x: number;
   protected _y: number;
   protected _selected: boolean;
@@ -23,7 +23,7 @@ export abstract class ElementBase {
     return this._strokeStyle;
   }
 
-  public set strokeStyle(style: stylingParams) {
+  public set strokeStyle(style: TypeStylingParams) {
     this._strokeStyle = style;
   }
 

@@ -15,13 +15,11 @@ export abstract class PathElement extends ElementBase {
   public abstract makePath(): void;
 
   public draw(ctx: CanvasRenderingContext2D): void {
-    console.log('Drawing', this);
     this.makePath();
     ctx.save();
     ctx.strokeStyle = this._strokeStyle;
     ctx.stroke(this._path);
     if (this._selected) {
-      console.log('Drawing selected', this);
       ctx.strokeStyle = 'blue';
       ctx.lineWidth = 4;
       ctx.setLineDash([8, 15]);

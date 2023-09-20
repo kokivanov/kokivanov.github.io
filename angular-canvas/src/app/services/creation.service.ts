@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ElementFactory } from '../utilities/element-factory';
-import { SelectOptions } from '../utilities/elements';
+import { EnumSelectOptions } from '../utilities/elements';
 import { IParams } from '../utilities/paramsInteface';
 import { CanvasService } from './canvas.service';
 
@@ -9,7 +9,7 @@ import { CanvasService } from './canvas.service';
   providedIn: 'root',
 })
 export class CreationService {
-  private _selection: SelectOptions = SelectOptions.HAND;
+  private _selection: EnumSelectOptions = EnumSelectOptions.HAND;
 
   public params: IParams = {
     x: 100,
@@ -38,23 +38,25 @@ export class CreationService {
 
   constructor(private readonly _canvasService: CanvasService) {}
 
-  private selectionToElement<T extends SelectOptions>(type: T, params: any) {
+  private selectionToElement<T extends EnumSelectOptions>(
+    type: T,
+    params: any
+  ) {
     return ElementFactory.createElement(type, params);
   }
 
   public addAuto() {
-    const params = { ...this.params };
     if (this._canvasService.lastElement?.name === this.params.name) {
       this.params.name = 'Shape - ' + Math.trunc(Math.random() * 1000000);
     }
-    const elem = this.selectionToElement(this._selection, params);
+    const elem = this.selectionToElement(this._selection, this.params);
     if (elem) {
       this._canvasService.addElement(elem);
     }
   }
 
-  public setParams(params: IParams) {
-    this.params = params;
+  public setParams(params: Partial<IParams>) {
+    Object.assign(this.params, params);
   }
 
   public selectImage(imgSrc: string) {
@@ -65,7 +67,9 @@ export class CreationService {
     this.params.value = src;
   }
 
-  public changeSelection(option: SelectOptions = SelectOptions.RECTANGLE) {
+  public changeSelection(
+    option: EnumSelectOptions = EnumSelectOptions.RECTANGLE
+  ) {
     if (option !== this._selection) {
       this._selection = option;
       this._selectionChange$.next(this._selection);

@@ -10,7 +10,7 @@ import { Observable, Subscription, fromEvent } from 'rxjs';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { CreationService } from 'src/app/services/creation.service';
 import { EditingService } from 'src/app/services/editing.service';
-import { SelectOptions } from 'src/app/utilities/elements';
+import { EnumSelectOptions } from 'src/app/utilities/elements';
 import { deepEqual } from 'src/app/utilities/objEqual';
 
 @Component({
@@ -44,15 +44,15 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   }
 
   private setParams() {
-    this._creationService.params.x = this._startPoint.x;
-    this._creationService.params.y = this._startPoint.y;
-    this._creationService.params.x2 = this._endPoint.x;
-    this._creationService.params.y2 = this._endPoint.y;
-    this._creationService.params.h = this._endPoint.y - this._startPoint.y;
-    this._creationService.params.w = this._endPoint.x - this._startPoint.x;
-    this._creationService.params.fontSize = Math.abs(
-      this._endPoint.y - this._startPoint.y
-    );
+    this._creationService.setParams({
+      x: this._startPoint.x,
+      y: this._startPoint.y,
+      x2: this._endPoint.x,
+      y2: this._endPoint.y,
+      h: this._endPoint.y - this._startPoint.y,
+      w: this._endPoint.x - this._startPoint.x,
+      fontSize: Math.abs(this._endPoint.y - this._startPoint.y),
+    });
   }
 
   public onMouseDown(event: Event) {
@@ -60,7 +60,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       this._startPoint = { x: event.offsetX, y: event.offsetY };
     }
 
-    if (this._creationService.selection === SelectOptions.HAND) {
+    if (this._creationService.selection === EnumSelectOptions.HAND) {
       // TODO: add editing service select
     } else {
       this._$mouseMoveSub = this._$dragNDrop.subscribe({
@@ -86,7 +86,7 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       return;
     }
     try {
-      if (this._creationService.selection === SelectOptions.HAND) {
+      if (this._creationService.selection === EnumSelectOptions.HAND) {
         this._editindService.selectShape();
       } else {
         if (event instanceof MouseEvent) {

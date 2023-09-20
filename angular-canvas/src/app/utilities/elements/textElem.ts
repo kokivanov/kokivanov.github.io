@@ -53,9 +53,11 @@ export class TextElem extends ElementBase {
     ctx.fillStyle = this.strokeStyle;
     ctx.fillText(this._value, this._x, this._y);
     ctx.strokeText(this._value, this._x, this._y);
+
     if (this._selected) {
       ctx.strokeStyle = 'blue';
-      ctx.setLineDash([1, 2]);
+      ctx.lineWidth = 4;
+      ctx.setLineDash([6, 3]);
       ctx.strokeText(this._value, this._x, this._y);
     }
     ctx.restore();

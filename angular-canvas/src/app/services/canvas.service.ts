@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElementFactory } from '../utilities/element-factory';
-import { SelectOptions } from '../utilities/elements';
+import { EnumSelectOptions } from '../utilities/elements';
 import { ElementBase } from '../utilities/elements/absstracts';
 import { IParams } from '../utilities/paramsInteface';
 
@@ -68,7 +68,7 @@ export class CanvasService {
     elem.drawTry(this._ctx);
   }
 
-  public renderPreviw(type: SelectOptions, params: IParams) {
+  public renderPreviw(type: EnumSelectOptions, params: IParams) {
     const path = ElementFactory.createElement(type, params);
     if (path) {
       this.drawPreviw(path);

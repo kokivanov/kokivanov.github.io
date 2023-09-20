@@ -1,9 +1,9 @@
 import {
   Ellipse,
+  EnumSelectOptions,
   ImageElem,
   Line,
   Rectangle,
-  SelectOptions,
   TextElem,
   Triangle,
 } from './elements';
@@ -18,37 +18,37 @@ import {
 type EB = ElementBase;
 
 export class ElementFactory {
-  public static createElement<T extends SelectOptions.RECTANGLE>(
+  public static createElement<T extends EnumSelectOptions.RECTANGLE>(
     type: T,
     params: IFillShapeParams
   ): EB;
-  public static createElement<T extends SelectOptions.TRIANGLE>(
+  public static createElement<T extends EnumSelectOptions.TRIANGLE>(
     type: T,
     params: IFillShapeParams
   ): EB;
-  public static createElement<T extends SelectOptions.LINE>(
+  public static createElement<T extends EnumSelectOptions.LINE>(
     type: T,
     params: ILineParams
   ): EB;
-  public static createElement<T extends SelectOptions.RECTANGLE>(
+  public static createElement<T extends EnumSelectOptions.RECTANGLE>(
     type: T,
     params: IFillShapeParams
   ): EB;
-  public static createElement<T extends SelectOptions.IMAGE>(
+  public static createElement<T extends EnumSelectOptions.IMAGE>(
     type: T,
     params: IImageParams
   ): EB;
-  public static createElement<T extends SelectOptions.TEXT>(
+  public static createElement<T extends EnumSelectOptions.TEXT>(
     type: T,
     params: ITextParams
   ): EB;
   public static createElement(
-    type: SelectOptions,
+    type: EnumSelectOptions,
     params: any | { x: number; y: number; h: number; w: number }
   ): EB;
 
   public static createElement(
-    type = SelectOptions.RECTANGLE,
+    type = EnumSelectOptions.RECTANGLE,
     params: any = {
       x: 0,
       y: 0,
@@ -60,9 +60,9 @@ export class ElementFactory {
     }
   ): EB {
     switch (type) {
-      case SelectOptions.RECTANGLE:
+      case EnumSelectOptions.RECTANGLE:
         return new Rectangle(params);
-      case SelectOptions.ELLIPSE:
+      case EnumSelectOptions.ELLIPSE:
         if (params.w < 0) {
           params.x = params.x + params.w;
           params.w = Math.abs(params.w);
@@ -72,13 +72,13 @@ export class ElementFactory {
           params.h = Math.abs(params.h);
         }
         return new Ellipse(params);
-      case SelectOptions.LINE:
+      case EnumSelectOptions.LINE:
         return new Line(params);
-      case SelectOptions.TRIANGLE:
+      case EnumSelectOptions.TRIANGLE:
         return new Triangle(params);
-      case SelectOptions.TEXT:
+      case EnumSelectOptions.TEXT:
         return new TextElem(params);
-      case SelectOptions.IMAGE:
+      case EnumSelectOptions.IMAGE:
         if (params.src === '') {
           throw new Error('No image selected');
         } else {

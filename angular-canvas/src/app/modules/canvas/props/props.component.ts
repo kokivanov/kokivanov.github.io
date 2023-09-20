@@ -3,7 +3,7 @@ import { Subscription, delay, of } from 'rxjs';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { CreationService } from 'src/app/services/creation.service';
 import { EditingService } from 'src/app/services/editing.service';
-import { SelectOptions } from 'src/app/utilities/elements';
+import { EnumSelectOptions } from 'src/app/utilities/elements';
 
 @Component({
   selector: 'app-props',
@@ -28,7 +28,7 @@ export class PropsComponent implements OnInit {
   // };
   public paramsType = 'fillParams';
   public get params() {
-    if (this._creationService.selection === SelectOptions.HAND) {
+    if (this._creationService.selection === EnumSelectOptions.HAND) {
       return this._editionService.params;
     } else {
       return this._creationService.params;
@@ -42,22 +42,20 @@ export class PropsComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this._creationService.selectionChange.subscribe({
-      next: () => {
-        if (
-          this._creationService.selection == SelectOptions.RECTANGLE ||
-          this._creationService.selection == SelectOptions.TRIANGLE ||
-          this._creationService.selection == SelectOptions.ELLIPSE
-        ) {
-          this.paramsType = 'fillParams';
-        } else if (this._creationService.selection == SelectOptions.LINE) {
-          this.paramsType = 'lineParams';
-        } else if (this._creationService.selection == SelectOptions.IMAGE) {
-          this.paramsType = 'imageParams';
-        } else if (this._creationService.selection == SelectOptions.TEXT) {
-          this.paramsType = 'textParams';
-        }
-      },
+    this._creationService.selectionChange.subscribe(() => {
+      if (
+        this._creationService.selection == EnumSelectOptions.RECTANGLE ||
+        this._creationService.selection == EnumSelectOptions.TRIANGLE ||
+        this._creationService.selection == EnumSelectOptions.ELLIPSE
+      ) {
+        this.paramsType = 'fillParams';
+      } else if (this._creationService.selection == EnumSelectOptions.LINE) {
+        this.paramsType = 'lineParams';
+      } else if (this._creationService.selection == EnumSelectOptions.IMAGE) {
+        this.paramsType = 'imageParams';
+      } else if (this._creationService.selection == EnumSelectOptions.TEXT) {
+        this.paramsType = 'textParams';
+      }
     });
   }
 

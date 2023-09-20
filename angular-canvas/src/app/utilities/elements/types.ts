@@ -7,8 +7,8 @@ import {
   Triangle,
 } from '../elements';
 
-export type stylingParams = string | CanvasGradient | CanvasPattern;
-export type Shape =
+export type TypeStylingParams = string | CanvasGradient | CanvasPattern;
+export type TypeShape =
   | ImageElem
   | TextElem
   | Line
@@ -16,7 +16,7 @@ export type Shape =
   | Rectangle
   | Triangle;
 
-export enum SelectOptions {
+export enum EnumSelectOptions {
   RECTANGLE = 'RECTANGLE',
   ELLIPSE = 'ELLIPSE',
   LINE = 'LINE',
@@ -25,8 +25,3 @@ export enum SelectOptions {
   IMAGE = 'IMAGE',
   HAND = 'HAND',
 }
-
-export type Line_t = 'Line';
-export type Rectangle_t = 'Rectangle';
-export type Ellipse_t = 'Ellipse';
-export type Triangle_t = 'Triangle';

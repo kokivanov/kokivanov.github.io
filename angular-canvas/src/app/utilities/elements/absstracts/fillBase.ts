@@ -1,5 +1,5 @@
 import { IFillShapeParams } from '../interfaces';
-import { stylingParams } from '../types';
+import { TypeStylingParams } from '../types';
 import { ShapeBase } from './shapeBase';
 
 export abstract class FillShabeBase extends ShapeBase {
@@ -8,13 +8,13 @@ export abstract class FillShabeBase extends ShapeBase {
     this._fillStyle = params.fillStyle || 'black';
   }
 
-  protected _fillStyle: stylingParams;
+  protected _fillStyle: TypeStylingParams;
 
   public get fillStyle() {
     return this._fillStyle;
   }
 
-  public set fillStyle(style: stylingParams) {
+  public set fillStyle(style: TypeStylingParams) {
     this._fillStyle = style;
   }
 
