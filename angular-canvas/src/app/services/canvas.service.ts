@@ -104,8 +104,6 @@ export class CanvasService {
 
   public render() {
     if (this._canvas) {
-      console.log(this.elements);
-
       this._ctx.clearRect(
         0,
         0,

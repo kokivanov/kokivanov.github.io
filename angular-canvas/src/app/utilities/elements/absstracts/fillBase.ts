@@ -38,8 +38,8 @@ export abstract class FillShabeBase extends ShapeBase {
     ctx.restore();
   }
 
-  public override setParams(params: IParams): void {
-    this._fillStyle = params.fillStyle ?? '';
+  public override setParams(params: Partial<IParams>): void {
+    this._fillStyle = params.fillStyle ?? this._fillStyle;
     super.setParams(params);
   }
 }

@@ -79,8 +79,8 @@ export class ImageElem extends ShapeBase {
     super.draw(ctx);
   }
 
-  public override setParams(params: IParams): void {
-    this._imgSrc = params.src;
+  public override setParams(params: Partial<IParams>): void {
+    this._imgSrc = params.src ?? this._imgSrc;
     super.setParams(params);
   }
 }

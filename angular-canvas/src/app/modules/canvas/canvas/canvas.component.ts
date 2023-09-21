@@ -21,6 +21,7 @@ import { deepEqual } from 'src/app/utilities/objEqual';
 export class CanvasComponent implements AfterViewInit, OnDestroy {
   @ViewChild('canvas') public canvas!: ElementRef<HTMLCanvasElement>;
   private _$dragNDrop!: Observable<Event>;
+  private _$resize = new Subscription();
   private _$mouseMoveSub = new Subscription();
   public mouseX = 0;
   public mouseY = 0;
@@ -38,9 +39,13 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
   public ngAfterViewInit(): void {
     this._canvasService.init(this.canvas.nativeElement);
     this._$dragNDrop = fromEvent(this.canvas.nativeElement, 'mousemove');
+    this._$resize = fromEvent(window, 'resize').subscribe(() => {
+      this._canvasService.render();
+    });
   }
   public ngOnDestroy(): void {
     this._canvasService.uninit();
+    this._$resize.unsubscribe();
   }
 
   private setParams() {
@@ -61,7 +66,28 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     }
 
     if (this._creationService.selection === EnumSelectOptions.HAND) {
-      // TODO: add editing service select
+      this._editindService.selectShape();
+      let isPrepared = false;
+      let previous_coords = this._startPoint;
+      this._$mouseMoveSub = this._$dragNDrop.subscribe({
+        next: (e) => {
+          e.preventDefault();
+          if (!isPrepared) {
+            this._editindService.prepareMove();
+            isPrepared = true;
+          }
+
+          if (e instanceof MouseEvent) {
+            const [dx, dy] = [
+              e.offsetX - previous_coords.x,
+              e.offsetY - previous_coords.y,
+            ];
+
+            previous_coords = { x: e.offsetX, y: e.offsetY };
+            this._editindService.moveShapes(dx, dy);
+          }
+        },
+      });
     } else {
       this._$mouseMoveSub = this._$dragNDrop.subscribe({
         next: (e) => {
@@ -87,7 +113,8 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     }
     try {
       if (this._creationService.selection === EnumSelectOptions.HAND) {
-        this._editindService.selectShape();
+        this._editindService.commitMovement();
+        this._$mouseMoveSub.unsubscribe();
       } else {
         if (event instanceof MouseEvent) {
           this._endPoint = { x: event.offsetX, y: event.offsetY };

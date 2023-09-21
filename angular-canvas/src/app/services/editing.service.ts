@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Ellipse, Line, TextElem } from '../utilities/elements';
+import { Ellipse, Line, Rectangle, TextElem } from '../utilities/elements';
 import { ElementBase, FillShabeBase } from '../utilities/elements/absstracts';
 import { deepEqual } from '../utilities/objEqual';
 import { IParams } from '../utilities/paramsInteface';
+import { typeToEnum, typeToParams } from '../utilities/typeToParams';
 import { CanvasService } from './canvas.service';
 
 @Injectable({
@@ -12,6 +13,7 @@ export class EditingService {
   private _lastHover?: ElementBase;
   private _selectedShapes = Array<ElementBase>();
   private _multiselect = false;
+  private _wasMoved = false;
 
   // public isShapeSElected
 
@@ -38,6 +40,14 @@ export class EditingService {
         src: '',
       };
     }
+  }
+
+  public get paramsType() {
+    return typeToParams(this._selectedShapes.at(-1) ?? new Rectangle({}));
+  }
+
+  public get selectedShapes() {
+    return [...this._selectedShapes];
   }
 
   constructor(private readonly _canvasService: CanvasService) {}
@@ -94,7 +104,6 @@ export class EditingService {
   }
 
   public useParams(params: IParams) {
-    console.log(this._selectedShapes);
     for (let elem of this._selectedShapes) {
       elem.setParams(params);
     }
@@ -124,6 +133,33 @@ export class EditingService {
       }
       this._selectedShapes = [];
       this._canvasService.render();
+    }
+  }
+
+  public prepareMove() {
+    this._wasMoved = true;
+    for (let elem of this._selectedShapes) {
+      this._canvasService.removeElem(elem.name);
+    }
+  }
+
+  public moveShapes(dx: number, dy: number) {
+    for (let elem of this._selectedShapes) {
+      elem.setParams({ x: elem.coords.x + dx, y: elem.coords.y + dy });
+    }
+
+    this._canvasService.render();
+    for (let elem of this._selectedShapes) {
+      this._canvasService.renderPreviw(typeToEnum(elem), elem.params);
+    }
+  }
+
+  public commitMovement() {
+    if (this._wasMoved) {
+      for (let elem of this._selectedShapes) {
+        this._canvasService.addElement(elem);
+      }
+      this._wasMoved = false;
     }
   }
 

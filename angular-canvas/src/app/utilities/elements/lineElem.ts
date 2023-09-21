@@ -73,6 +73,13 @@ export class Line extends PathElement {
     ctx.save();
     ctx.strokeStyle = this._strokeStyle;
     ctx.stroke(this._path);
+    if (this._selected) {
+      ctx.strokeStyle = 'blue';
+      ctx.lineWidth = 4;
+      ctx.setLineDash([8, 15]);
+      ctx.stroke(this._path);
+      ctx.setLineDash([]);
+    }
     ctx.restore();
   }
 
@@ -84,9 +91,9 @@ export class Line extends PathElement {
     ctx.restore();
   }
 
-  public override setParams(params: IParams): void {
-    this._x2 = params.x2 ?? 200;
-    this._y2 = params.y2 ?? 200;
+  public override setParams(params: Partial<IParams>): void {
+    this._x2 = params.x2 ?? this._x2;
+    this._y2 = params.y2 ?? this._y2;
     super.setParams(params);
   }
 }

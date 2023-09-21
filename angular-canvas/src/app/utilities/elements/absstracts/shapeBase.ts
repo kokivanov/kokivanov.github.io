@@ -62,10 +62,10 @@ export abstract class ShapeBase extends PathElement {
     ctx.restore();
   }
 
-  public override setParams(params: IParams): void {
-    this._height = params.h ?? 100;
-    this._width = params.w ?? 100;
-    this._rotation = params.r ?? 0;
+  public override setParams(params: Partial<IParams>): void {
+    this._height = params.h ?? this._height;
+    this._width = params.w ?? this._width;
+    this._rotation = params.r ?? this._rotation;
     super.setParams(params);
   }
 }

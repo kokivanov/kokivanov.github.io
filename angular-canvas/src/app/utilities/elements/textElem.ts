@@ -80,8 +80,9 @@ export class TextElem extends ElementBase {
     ctx.restore();
   }
 
-  public override setParams(params: IParams): void {
-    this._value = params.value;
-    this._fontSize = params.fontSize ?? 14;
+  public override setParams(params: Partial<IParams>): void {
+    this._value = params.value ?? this._value;
+    this._fontSize = params.fontSize ?? this._fontSize;
+    super.setParams(params);
   }
 }

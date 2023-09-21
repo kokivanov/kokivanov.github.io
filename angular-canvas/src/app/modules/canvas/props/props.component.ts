@@ -11,27 +11,19 @@ import { EnumSelectOptions } from 'src/app/utilities/elements';
   styleUrls: ['./props.component.scss'],
 })
 export class PropsComponent implements OnInit {
-  // public params: IParams = {
-  //   x: 100,
-  //   y: 100,
-  //   strokeStyle: '#000000',
-  //   name: 'Shape-1',
-  //   h: 100,
-  //   w: 100,
-  //   fillStyle: '#FF0000',
-  //   r: 0,
-  //   x2: 200,
-  //   y2: 200,
-  //   value: 'Hello world!',
-  //   fontSize: 14,
-  //   src: '',
-  // };
-  public paramsType = 'fillParams';
   public get params() {
     if (this._creationService.selection === EnumSelectOptions.HAND) {
       return this._editionService.params;
     } else {
       return this._creationService.params;
+    }
+  }
+
+  public get paramsType() {
+    if (this._creationService.selection == EnumSelectOptions.HAND) {
+      return this._editionService.paramsType;
+    } else {
+      return this._creationService.getParamsType();
     }
   }
 
@@ -71,18 +63,8 @@ export class PropsComponent implements OnInit {
 
   public ngOnInit(): void {
     this._creationService.selectionChange.subscribe(() => {
-      if (
-        this._creationService.selection == EnumSelectOptions.RECTANGLE ||
-        this._creationService.selection == EnumSelectOptions.TRIANGLE ||
-        this._creationService.selection == EnumSelectOptions.ELLIPSE
-      ) {
-        this.paramsType = 'fillParams';
-      } else if (this._creationService.selection == EnumSelectOptions.LINE) {
-        this.paramsType = 'lineParams';
-      } else if (this._creationService.selection == EnumSelectOptions.IMAGE) {
-        this.paramsType = 'imageParams';
-      } else if (this._creationService.selection == EnumSelectOptions.TEXT) {
-        this.paramsType = 'textParams';
+      if (this._creationService.selection === EnumSelectOptions.HAND) {
+        return;
       }
     });
   }

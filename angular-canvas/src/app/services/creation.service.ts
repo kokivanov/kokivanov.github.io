@@ -27,6 +27,13 @@ export class CreationService {
     src: '',
   };
 
+  private _paramsType = 'fillParams';
+  private _paramsTypeSubject$ = new Subject();
+
+  public get paramsType() {
+    return this._paramsTypeSubject$.asObservable();
+  }
+
   private _selectionChange$ = new Subject<string>();
   public get selectionChange() {
     return this._selectionChange$.asObservable();
@@ -37,6 +44,18 @@ export class CreationService {
   }
 
   constructor(private readonly _canvasService: CanvasService) {}
+
+  public getParamsType() {
+    if (this.selection == EnumSelectOptions.LINE) {
+      return 'lineParams';
+    } else if (this.selection == EnumSelectOptions.IMAGE) {
+      return 'imageParams';
+    } else if (this.selection == EnumSelectOptions.TEXT) {
+      return 'textParams';
+    } else {
+      return 'fillParams';
+    }
+  }
 
   private selectionToElement<T extends EnumSelectOptions>(
     type: T,
@@ -73,6 +92,8 @@ export class CreationService {
     if (option !== this._selection) {
       this._selection = option;
       this._selectionChange$.next(this._selection);
+      this._paramsType = this.getParamsType();
+      this._paramsTypeSubject$.next(this._paramsType);
     }
   }
 
