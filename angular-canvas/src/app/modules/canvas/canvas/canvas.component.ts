@@ -60,34 +60,38 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  private handleHandMouseDown() {
+    this._editindService.selectShape();
+    let isPrepared = false;
+    let previous_coords = this._startPoint;
+    this._$mouseMoveSub = this._$dragNDrop.subscribe({
+      next: (e) => {
+        e.preventDefault();
+        if (!isPrepared) {
+          this._editindService.prepareMove();
+          isPrepared = true;
+        }
+
+        if (e instanceof MouseEvent) {
+          const [dx, dy] = [
+            e.offsetX - previous_coords.x,
+            e.offsetY - previous_coords.y,
+          ];
+
+          previous_coords = { x: e.offsetX, y: e.offsetY };
+          this._editindService.moveShapes(dx, dy);
+        }
+      },
+    });
+  }
+
   public onMouseDown(event: Event) {
     if (event instanceof MouseEvent) {
       this._startPoint = { x: event.offsetX, y: event.offsetY };
     }
 
     if (this._creationService.selection === EnumSelectOptions.HAND) {
-      this._editindService.selectShape();
-      let isPrepared = false;
-      let previous_coords = this._startPoint;
-      this._$mouseMoveSub = this._$dragNDrop.subscribe({
-        next: (e) => {
-          e.preventDefault();
-          if (!isPrepared) {
-            this._editindService.prepareMove();
-            isPrepared = true;
-          }
-
-          if (e instanceof MouseEvent) {
-            const [dx, dy] = [
-              e.offsetX - previous_coords.x,
-              e.offsetY - previous_coords.y,
-            ];
-
-            previous_coords = { x: e.offsetX, y: e.offsetY };
-            this._editindService.moveShapes(dx, dy);
-          }
-        },
-      });
+      this.handleHandMouseDown();
     } else {
       this._$mouseMoveSub = this._$dragNDrop.subscribe({
         next: (e) => {

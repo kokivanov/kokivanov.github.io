@@ -13,14 +13,12 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './compenents/navbar/navbar.component';
-import { MainPageModule } from './modules/main-page/main-page.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
-    MainPageModule,
     HttpClientModule,
     ReactiveFormsModule,
     NbThemeModule.forRoot(),

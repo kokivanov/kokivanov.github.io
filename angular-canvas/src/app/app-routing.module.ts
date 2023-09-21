@@ -4,13 +4,6 @@ import { authorizedGuard } from './guards/authorized.guard';
 
 const routes: Routes = [
   {
-    path: 'main',
-    loadChildren: () =>
-      import('./modules/main-page/main-page.module').then(
-        (m) => m.MainPageModule
-      ),
-  },
-  {
     path: 'auth',
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
