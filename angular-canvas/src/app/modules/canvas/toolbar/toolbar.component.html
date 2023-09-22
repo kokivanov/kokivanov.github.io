@@ -7,6 +7,7 @@
     class="selected"
     [status]="statuses.HAND"
     (click)="onToolSelectClick($event, options.HAND)"
+    i18n="@@tools.hand"
   >
     HAND
   </button>
@@ -18,6 +19,7 @@
     class="selected"
     [status]="statuses.RECTANGLE"
     (click)="onToolSelectClick($event, options.RECTANGLE)"
+    i18n="@@tools.rectangle"
   >
     RECTANGLE
   </button>
@@ -27,6 +29,7 @@
     [disabled]="!isInitialized"
     [status]="statuses.ELLIPSE"
     (click)="onToolSelectClick($event, options.ELLIPSE)"
+    i18n="@@tools.ellipse"
   >
     ELIPSE
   </button>
@@ -36,6 +39,7 @@
     [disabled]="!isInitialized"
     [status]="statuses.LINE"
     (click)="onToolSelectClick($event, options.LINE)"
+    i18n="@@tools.line"
   >
     LINE
   </button>
@@ -45,6 +49,7 @@
     [disabled]="!isInitialized"
     [status]="statuses.TRIANGLE"
     (click)="onToolSelectClick($event, options.TRIANGLE)"
+    i18n="@@tools.triangle"
   >
     TRIANGLE
   </button>
@@ -54,6 +59,7 @@
     [disabled]="!isInitialized"
     [status]="statuses.TEXT"
     (click)="onToolSelectClick($event, options.TEXT)"
+    i18n="@@tools.text"
   >
     TEXT
   </button>
@@ -64,6 +70,7 @@
     [disabled]="!isInitialized"
     [status]="statuses.IMAGE"
     (click)="onToolSelectClick($event, options.IMAGE)"
+    i18n="@@tools.image"
   >
     IMAGE
   </button>
@@ -72,6 +79,7 @@
     id="clear-button"
     [disabled]="!isInitialized"
     (click)="onClearClick()"
+    i18n="@@tools.clear"
   >
     CLEAR
   </button>

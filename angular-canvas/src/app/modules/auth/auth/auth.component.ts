@@ -16,6 +16,8 @@ export class AuthComponent {
     private readonly _toast: NbToastrService
   ) {}
 
+  public i18n_authSubmit = $localize`:@@auth.form.submit:Submit`;
+
   public authForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -39,15 +41,19 @@ export class AuthComponent {
           next: (v) => {
             this.toggleForm();
             this._router.navigate(['/']);
-            this._toast.info('Welcome, ' + v.firstName + '!', 'Logged in!', {
-              duration: 2000,
-            });
+            this._toast.info(
+              $localize`Welcome, ${v.firstName}!`,
+              $localize`:@@auth.info.succes:Logged in!`,
+              {
+                duration: 2000,
+              }
+            );
           },
           error: () => {
             this.toggleForm();
             this._toast.danger(
-              "User with such username and password wasn't found",
-              'Log in failed',
+              $localize`:@@auth.error.desc:User with such username and password wasn't found`,
+              $localize`:@@auth.error.header:Log in failed`,
               { duration: 6000 }
             );
           },

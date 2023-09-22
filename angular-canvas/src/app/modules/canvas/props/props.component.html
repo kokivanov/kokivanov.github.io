@@ -1,6 +1,6 @@
 <div>
   <p>
-    <label for="name">name: </label>
+    <label for="name" i18n="@@props.name">name: </label>
     <input
       nbInput
       type="text"
@@ -33,7 +33,7 @@
     />
   </p>
   <p>
-    <label for="strokeStyle">strokeStyle: </label>
+    <label for="strokeStyle" i18n="@@props.strokeStyle">strokeStyle: </label>
     <input
       nbInput
       fieldSize="medium"
@@ -48,7 +48,7 @@
 
 <div *ngIf="paramsType === 'fillParams' || paramsType === 'imageParams'">
   <p>
-    <label for="h">h: </label>
+    <label for="h" i18n="@@props.h">h: </label>
     <input
       nbInput
       type="number"
@@ -59,7 +59,7 @@
     />
   </p>
   <p>
-    <label for="w">w: </label>
+    <label for="w" i18n="@@props.w">w: </label>
     <input
       nbInput
       type="number"
@@ -70,7 +70,7 @@
     />
   </p>
   <p>
-    <label for="r">r: </label>
+    <label for="r" i18n="@@props.r">r: </label>
     <input
       nbInput
       type="number"
@@ -81,7 +81,7 @@
     />
   </p>
   <p *ngIf="paramsType === 'fillParams'">
-    <label for="fillStyle">fillStyle: </label>
+    <label for="fillStyle" i18n="@@props.fillStyle">fillStyle: </label>
     <input
       nbInput
       fieldSize="medium"
@@ -131,7 +131,7 @@
 
 <div *ngIf="paramsType === 'textParams'">
   <p>
-    <label for="r">r: </label>
+    <label for="r" i18n="@@props.r">r: </label>
     <input
       nbInput
       type="number"
@@ -142,7 +142,7 @@
     />
   </p>
   <p>
-    <label for="fontSize">fontSize: </label>
+    <label for="fontSize" i18n="@@props.fontSize">fontSize: </label>
     <input
       nbInput
       type="number"
@@ -153,7 +153,7 @@
     />
   </p>
   <p>
-    <label for="value">value: </label>
+    <label for="value" i18n="@@props.value">value: </label>
     <input
       nbInput
       type="text"
@@ -164,4 +164,11 @@
     />
   </p>
 </div>
-<button nbButton status="danger" (click)="onRemoveClick()">Remove</button>
+<button
+  nbButton
+  status="danger"
+  (click)="onRemoveClick()"
+  i18n="@@props.button.remove"
+>
+  Remove
+</button>

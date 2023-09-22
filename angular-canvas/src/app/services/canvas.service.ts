@@ -49,13 +49,17 @@ export class CanvasService {
       this._canvas.width = this._canvas.clientWidth;
       let context: CanvasRenderingContext2D | null;
       if (!(context = canvas.getContext('2d')))
-        throw TypeError('Please provide valid canvas element');
+        throw TypeError(
+          $localize`:@@canvas.error.validCanvas:Please provide valid canvas element`
+        );
       this._ctx = context;
       this._elements = this._elements.concat(elements);
 
       this.render();
     } else {
-      throw TypeError('Must provide valid canvas element');
+      throw TypeError(
+        $localize`:@@canvas.error.validCanvas2:Must provide valid canvas element`
+      );
     }
   }
 

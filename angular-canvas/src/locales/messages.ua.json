@@ -1,0 +1,33 @@
+{
+  "locale": "ua",
+  "translations": {
+    "navbar.logout" : "Вийти",
+    "auth.form.username": "Ім'я користувача",
+    "auth.form.password": "Пароль: ",
+    "auth.form.submit": "Увійти",
+    "3733868150242289958": "Ласкавао просимо, {$PH}!",
+    "auth.info.succes": "Ви увійшли!",
+    "auth.error.desc": "Користувача з такими логіном та паролем не існує",
+    "auth.error.header": "Не вдалося увійти",
+    "canvas.error": "Виникла помилка!",
+    "props.name": "Ім'я: ",
+    "props.strokeStyle": "Колір строки: ",
+    "props.h": "Висота: ",
+    "props.w": "Ширина: ",
+    "props.r": "Нахил: ",
+    "props.fillStyle": "Заливка: ",
+    "props.fontSize": "Розмір тексту: ",
+    "props.value": "Значення: ",
+    "props.button.remove": "Видалити",
+    "tools.hand": " РУКА ",
+    "tools.rectangle": " ПРЯМОКУТНИК ",
+    "tools.ellipse": " ЕЛІПС ",
+    "tools.line": " ЛІНІЯ ",
+    "tools.triangle": " ТРИКУТНИК ",
+    "tools.text": " ТЕКСТ ",
+    "tools.image": " ЗОБРАЖЕННЯ ",
+    "tools.clear": " ОЧИСТИТИ ",
+    "canvas.error.validCanvas": "Будьласка надайте об'єкт канвасу",
+    "canvas.error.validCanvas2": "Елемент канвасу повинен бути валідним"
+  }
+}

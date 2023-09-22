@@ -134,7 +134,10 @@ export class CanvasComponent implements AfterViewInit, OnDestroy {
       }
     } catch (err) {
       if (err instanceof Error) {
-        this._toastrService.warning(err.message, 'An error occured!');
+        this._toastrService.warning(
+          err.message,
+          $localize`:@@canvas.error:An error occured!`
+        );
       }
     }
   }

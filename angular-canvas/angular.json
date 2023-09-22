@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular-canvas-2": {
+      "i18n": {
+        "sourceLocale":"en-US",
+        "locales": {
+          "ua": "./src/locales/messages.ua.json"
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +23,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-canvas-2",
+            "outputPath": "docs",
+            "i18nMissingTranslation": "error",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -34,12 +41,18 @@
             "scripts": []
           },
           "configurations": {
+            "ua": {
+              "localize" : [
+                "ua"
+              ]
+            },
             "production": {
+              "localize": true,
               "budgets": [
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -61,7 +74,8 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "localize": false
             }
           },
           "defaultConfiguration": "production"
@@ -74,14 +88,20 @@
             },
             "development": {
               "browserTarget": "angular-canvas-2:build:development"
+            },
+            "ua": {
+              "browserTarget": "angular-canvas-2:build:development,ua"
             }
           },
+          
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-canvas-2:build"
+            "browserTarget": "angular-canvas-2:build",
+            "format": "json",
+            "outputPath": "src/locales"
           }
         },
         "test": {

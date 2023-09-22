@@ -1,0 +1,33 @@
+{
+  "locale": "en-US",
+  "translations": {
+    "navbar.logout" : "Log out",
+    "auth.form.username" : "Username: ",
+    "auth.form.password": "Password: ",
+    "auth.form.submit": "Submit",
+    "3733868150242289958": "Welcome, {$PH}!",
+    "auth.info.succes": "Logged in!",
+    "auth.error.desc": "User with such username and password wasn't found",
+    "auth.error.header": "Log in failed",
+    "canvas.error": "An error occured!",
+    "props.name": "name: ",
+    "props.strokeStyle": "strokeStyle: ",
+    "props.h": "h: ",
+    "props.w": "w: ",
+    "props.r": "r: ",
+    "props.fillStyle": "fillStyle: ",
+    "props.fontSize": "fontSize: ",
+    "props.value": "value: ",
+    "props.button.remove": " Remove\n",
+    "tools.hand": " HAND ",
+    "tools.rectangle": " RECTANGLE ",
+    "tools.ellipse": " ELIPSE ",
+    "tools.line": " LINE ",
+    "tools.triangle": " TRIANGLE ",
+    "tools.text": " TEXT ",
+    "tools.image": " IMAGE ",
+    "tools.clear": " CLEAR ",
+    "canvas.error.validCanvas": "Please provide valid canvas element",
+    "canvas.error.validCanvas2": "Must provide valid canvas element"
+  }
+}
