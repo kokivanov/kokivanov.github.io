@@ -25,4 +25,10 @@ export class NavbarComponent {
     this._authService.logout();
     this._router.navigateByUrl('/auth');
   }
+
+  public onLocaleChange(e: Event) {
+    if (e.target instanceof HTMLSelectElement) {
+      window.location.href = `https://kokivanov.github.io/${e.target.value}/`;
+    }
+  }
 }
