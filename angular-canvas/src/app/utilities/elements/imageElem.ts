@@ -48,6 +48,7 @@ export class ImageElem extends ShapeBase {
   }
 
   public makePath(): void {
+    this._path = new Path2D();
     if (this._height === 0 && this._width === 0) {
       this._height = this._img.height;
       this._width = this._img.width;
